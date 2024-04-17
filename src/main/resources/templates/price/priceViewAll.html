@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{price/priceNav.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Price</title>
+</head>
+<body>
+    <div layout:fragment="price-content">
+
+        <div class="price-view h-100 w-100 p-4">
+
+            <div class="price-header w-100 d-flex justify-content-between align-items-center mb-2">
+
+                <div class="h-100 w-50 d-flex align-items-center gap-2 mb-4">
+                    <input class="price-header-search"
+                           type="search"
+                           placeholder="Find Tour Code"
+                    />
+                    <button class="price-header-search-btn btn btn-primary"
+                            type="button" >
+                        <i class="fa-solid fa-magnifying-glass"></i>Search
+                    </button>
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="text-center" scope="col">Tour Code</th>
+                    <th class="text-center" scope="col">Creator</th>
+                    <th class="text-center" scope="col">Create Date</th>
+                    <th class="text-center" scope="col">Approved By</th>
+                    <th class="text-center" scope="col">Approved Date</th>
+                    <th class="text-center" scope="col">Status</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody th:each="priceDTO : ${priceDtoList}">
+                <tr>
+                    <td class="text-center" th:text="${priceDTO.tourCode}"></td>
+                    <td class="text-center" th:text="${priceDTO.creator}"></td>
+                    <td class="text-center" th:text="${priceDTO.createDate}"></td>
+                    <td class="text-center" th:text="${priceDTO.approvedBy}"></td>
+                    <td class="text-center" th:text="${priceDTO.approvalDate}"></td>
+                    <td class="fw-semibold text-primary text-center" th:text="${priceDTO.approvalStatus}"></td>
+                    <td class="d-flex justify-content-center gap-1 ">
+                        <a class="text-primary">View</a>
+                        <a class="text-success">Amend</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</body>
+</html>
