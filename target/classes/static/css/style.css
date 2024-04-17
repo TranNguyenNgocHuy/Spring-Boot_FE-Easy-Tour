@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap");
+
+:root {
+
+  --primary-color: #53B9EA;
+
+  --background-primary: #e9ecef;
+  --background-white: #fff;
+
+  --gray-icon: #868e96;
+
+
+  --text-color01: #343a40;
+
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-color01);
+}
+
+.wrapper-main {
+    background-color: var(--background-primary);
+}
+
+.header {
+   background-color: transparent;
+   height: 50px;
+}
+
+.header-notification {
+    color: var(--gray-icon);
+    font-size: 20px;
+}
+
+.header-user {
+    height: 28px;
+    width: 28px;
+    border-radius: 50px;
+    border: 2px solid var(--primary-color);
+}
+
+.header-user-icon {
+    color: var(--gray-icon);
+}
+
+.header-user-name {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.body-nav {
+    width: 50px;
+    background-color: var(--background-white);
+    border-radius: 5px;
+    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+}
+
+.body-main {
+    width: calc(100% - 50px);
+}
+
+.footer {
+    background-color: var(--background-white);
+    border-radius: 5px;
+    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+    height: 50px;
+}
+
+
+.dashboard-page {
+    background-color: var(--background-white);
+    border-radius: 5px;
+    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+}
+
+.priceNav-page {
+    width: 170px;
+    background-color: var(--background-white);
+    border-radius: 5px;
+    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+    flex:1;
+}
+
+.price-content {
+    width: calc(100% - 170px)
+}
+
+.price-view {
+     background-color: var(--background-white);
+     border-radius: 5px;
+     box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+}
+
+.price-header-title {
+    border-bottom: 1px solid var(--background-primary);
+    padding-bottom: 5px;
+    height: 45px;
+}
+
+
+.price-header {
+    border-bottom: 1px solid var(--background-primary);
+    height: 45px;
+}
+
+.price-header-search {
+    width: 35%;
+    height: 35px;
+    border-radius: 10px;
+    padding: 0 5px;
+    outline: none;
+    border: 0.5px solid var(--background-primary);
+
+}
+
+.price-header-search-btn {
+    height: 35px;
+}

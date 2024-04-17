@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{price/priceNav.html}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Price</title>
+</head>
+<body>
+    <div layout:fragment="price-content">
+        <div class="price-view h-100 w-100 p-4">
+            <div class="price-header-title w-100">
+                <h3>Create Price</h3>
+            </div>
+        </div>
+
+        <form action=""
+              method="post"
+              class="w-100 d-flex flex-column">
+
+            <div>
+               <label>Tour Code</label>
+                <input type="text"
+                       placeholder="ABC01"
+                >
+            </div>
+
+        </form>
+    </div>
+</body>
+</html>
