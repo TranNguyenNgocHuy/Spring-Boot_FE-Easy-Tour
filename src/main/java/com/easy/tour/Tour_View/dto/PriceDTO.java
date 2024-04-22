@@ -3,35 +3,81 @@ package com.easy.tour.Tour_View.dto;
 
 import com.easy.tour.Tour_View.Enum.ApprovalStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 @Data
 public class PriceDTO extends BaseObject {
 
     private Long priceId;
+
+    @NotEmpty(message = "You must enter Tour Code field.")
     private String tourCode;
+
     private String creator;
     private Date createDate;
     private String approvedBy;
     private Date approvalDate;
     private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_OP;
-    private BigDecimal Coach;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
+    private BigDecimal coach;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal mainGuider;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal localGuider;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal airTicket;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal food;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal attraction;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal hotel;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal insurance;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal tax;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal otherPrice;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal visaFee;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal adult;
+
+    @Min(value = 0, message = "The value must be >= 0.")
+    @NotNull(message = "The value must be numeric.")
     private BigDecimal children;
 }
