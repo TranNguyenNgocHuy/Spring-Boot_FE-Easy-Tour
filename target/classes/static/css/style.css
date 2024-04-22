@@ -4,14 +4,15 @@
 
   --primary-color: #53B9EA;
 
-  --background-primary: #e9ecef;
+  --background-primary: #f1f3f5;
   --background-white: #fff;
 
+
   --gray-icon: #868e96;
+  --gray-border: #E0E0E0;
 
 
   --text-color01: #343a40;
-
 }
 
 * {
@@ -24,6 +25,15 @@ body {
   font-family: "Poppins", sans-serif;
   color: var(--text-color01);
 }
+
+.btn {
+    width: 120px;
+    height: 40px;
+}
+
+/* ///////////////////////// */
+/* ***** MAIN LAYOUT ***** */
+/* ///////////////////////// */
 
 .wrapper-main {
     background-color: var(--background-primary);
@@ -59,7 +69,7 @@ body {
     width: 50px;
     background-color: var(--background-white);
     border-radius: 5px;
-    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
 }
 
 .body-main {
@@ -69,22 +79,30 @@ body {
 .footer {
     background-color: var(--background-white);
     border-radius: 5px;
-    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
     height: 50px;
 }
 
+/* ///////////////////////// */
+/* *** DASHBOARD LAYOUT **** */
+/* ///////////////////////// */
 
 .dashboard-page {
     background-color: var(--background-white);
     border-radius: 5px;
-    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
 }
+
+
+/* ///////////////////////// */
+/* ****** PRICE LAYOUT ***** */
+/* ///////////////////////// */
 
 .priceNav-page {
     width: 170px;
     background-color: var(--background-white);
     border-radius: 5px;
-    box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
     flex:1;
 }
 
@@ -95,20 +113,73 @@ body {
 .price-view {
      background-color: var(--background-white);
      border-radius: 5px;
-     box-shadow: drop-shadow(0px 1px 3px rgba(96, 108, 128, 0.5));
+     box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
 }
 
 .price-header-title {
     border-bottom: 1px solid var(--background-primary);
     padding-bottom: 5px;
-    height: 45px;
+    height: 40px;
 }
 
-
-.price-header {
-    border-bottom: 1px solid var(--background-primary);
-    height: 45px;
+/* ///////////////////////// */
+/* ***** PRICE CREATE ***** */
+.create-price-header {
+    height: 110px;
+    border-bottom: 0.5px solid var(--background-primary);
 }
+
+.price-form {
+    height: 749px;
+    overflow: auto;
+}
+
+.price-item {
+  width: 295px;
+  height: 50px;
+  position: relative;
+}
+
+.price-input {
+    height: 30px;
+    border-radius: 6px;
+    padding: 0 10px;
+    outline: none;
+    border: 0.5px solid var(--gray-border);
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+}
+
+.price-input_unit {
+    position: absolute;
+    left: 91%;
+    top: 8%;
+}
+
+.price-text-error {
+        font-size: 12px;
+}
+
+.create-price-body_first {
+    border-bottom: 0.5px solid var(--background-primary);
+    height: 80px;
+}
+
+.create-price-body_second {
+    border-bottom: 0.5px solid var(--background-primary);
+    height: 240px;
+}
+
+.create-price-body_third {
+    border-bottom: 0.5px solid var(--background-primary);
+    height: 80px;
+}
+
+.create-price-body_fourth {
+    min-height: 150px;
+}
+
+/* ///////////////////////// */
+/* ***** CREATE LIST ***** */
 
 .price-header-search {
     width: 35%;
@@ -116,10 +187,13 @@ body {
     border-radius: 10px;
     padding: 0 5px;
     outline: none;
-    border: 0.5px solid var(--background-primary);
+    border: 0.5px solid var(--gray-border);
 
 }
 
 .price-header-search-btn {
     height: 35px;
 }
+
+/* ///////////////////////// */
+/* **** CREATE APPROVE **** */
