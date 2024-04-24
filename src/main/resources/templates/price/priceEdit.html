@@ -2,21 +2,20 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{price/priceNav.html}"
       xmlns:th="http://www.thymeleaf.org"
-      lang="en"
->
+      lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Price</title>
+    <title>Price Edit</title>
 </head>
 <body>
     <div layout:fragment="price-content">
         <div class="price-view h-100 w-100 px-4 py-3">
             <div class="price-header-title w-100">
-                <h5>Create Price</h5>
+                <h5>Edit Price</h5>
             </div>
 
-            <form action="/admin/v1/price/create"
+            <form action="/admin/v1/price/edit"
                   method="post"
                   th:object="${priceDto}"
                   class="price-form w-100 d-flex flex-column py-3 px-4">
@@ -29,12 +28,10 @@
                                    type="text"
                                    placeholder="Enter Tour Code"
                                    th:field="${priceDto.tourCode}"
+                                   readonly
+                                   disabled
                             >
-                            <p th:if="${#fields.hasErrors('tourCode')}"
-                               th:errorclass="text-danger"
-                               th:errors="${priceDto.tourCode}"
-                               class="price-text-error"
-                            ></p>
+                            <input type="hidden" th:field="${priceDto.tourCode}" />
                         </div>
                     </div>
 
@@ -326,14 +323,13 @@
                 <div class="create-price-body_fourth">
                     <div class="h-100 d-flex flex-column justify-content-between align-items-end ">
                         <div class="d-flex align-items-center gap-2">
-                            <p th:if="${showProfit}"
-                               th:text="${percentProfit}"
+                            <p th:text="${percentProfit}"
                                class="text-danger m-0 fw-semibold"></p>
                             <button type="submit" name="action" value="calculate" class="btn btn-warning">Calculate</button>
                         </div>
                         <div>
                             <button type="submit" name="action" value="cancel" class="btn btn-outline-secondary">Cancel</button>
-                            <button type="submit" name="action" value="create" class="btn btn-primary">Submit</button>
+                            <button type="submit" name="action" value="update" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>

@@ -73,11 +73,11 @@ public class PriceDTO extends BaseObject {
     @NotNull(message = "The value must be numeric.")
     private BigDecimal visaFee;
 
-    @Min(value = 0, message = "The value must be >= 0.")
+    @Min(value = 1, message = "The value must be >= 1.")
     @NotNull(message = "The value must be numeric.")
     private BigDecimal adult;
 
-    @Min(value = 0, message = "The value must be >= 0.")
+    @Min(value = 1, message = "The value must be >= 1.")
     @NotNull(message = "The value must be numeric.")
     private BigDecimal children;
 }

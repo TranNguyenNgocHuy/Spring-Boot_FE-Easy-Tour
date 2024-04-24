@@ -16,6 +16,11 @@ public interface ApiPath {
 
     String PRICE_VIEW_ALL_PAGE = API_BASE_URL + "/price/view-all-price";
 
+    String PRICE_PREVIEW = API_BASE_URL + "/price/preview-price";
+
+    String PRICE_EDIT = API_BASE_URL + "/price/edit";
+    String PRICE_DELETE = API_BASE_URL + "/price/edit";
+
 
 
     String API = "http://localhost:8080/api/v1";
@@ -36,8 +41,9 @@ public interface ApiPath {
     //Price
 
     String PRICE_GET_All = API + "/price/get-all";
+    String PRICE_GET_BY_TOUR_CODE = API + "/price/";
     String PRICE_CREATE = API + "/price/create-price";
-    String PRICE_UPDATE = API + "/price/{tourCode}";
-    String PRICE_DELETE = API + "/price/{tourCode}";
+    String PRICE_UPDATE = API + "/price/update/";
+    String PRICE_DELETE_API = API + "/price/delete/";
     // end
 }

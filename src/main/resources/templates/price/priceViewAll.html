@@ -38,17 +38,27 @@
                     <th class="text-center" scope="col">Action</th>
                 </tr>
                 </thead>
-                <tbody th:each="priceDTO : ${priceDtoList}">
+                <tbody th:each="priceDto : ${priceDtoList}">
                 <tr>
-                    <td class="text-center" th:text="${priceDTO.tourCode}"></td>
-                    <td class="text-center" th:text="${priceDTO.creator}"></td>
-                    <td class="text-center" th:text="${priceDTO.createDate}"></td>
-                    <td class="text-center" th:text="${priceDTO.approvedBy}"></td>
-                    <td class="text-center" th:text="${priceDTO.approvalDate}"></td>
-                    <td class="fw-semibold text-primary text-center" th:text="${priceDTO.approvalStatus}"></td>
+                    <td class="text-center" th:text="${priceDto.tourCode}"></td>
+                    <td class="text-center" th:text="${priceDto.creator}"></td>
+                    <td class="text-center" th:text="${priceDto.createDate}"></td>
+                    <td class="text-center" th:text="${priceDto.approvedBy}"></td>
+                    <td class="text-center" th:text="${priceDto.approvalDate}"></td>
+                    <td class="fw-semibold text-primary text-center" th:text="${priceDto.approvalStatus}"></td>
                     <td class="d-flex justify-content-center gap-1 ">
-                        <a class="text-primary" role="button" >View</a>
-                        <a class="text-success">Amend</a>
+                        <a class="btn btn-primary btn-small"
+                           role="button"
+                           th:href="@{/admin/v1/price/preview-price(tourCode=${priceDto.tourCode})}"
+                        >View</a>
+                        <a class="btn btn-success btn-small"
+                           role="button"
+                           th:href="@{/admin/v1/price/edit(tourCode=${priceDto.tourCode})}"
+                        >Amend</a>
+                        <a class="btn btn-danger btn-small"
+                           role="button"
+                           th:href="@{/admin/v1/price/delete(tourCode=${priceDto.tourCode})}"
+                        >Delete</a>
                     </td>
                 </tr>
                 </tbody>
