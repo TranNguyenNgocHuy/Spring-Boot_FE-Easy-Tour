@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Navbar</title>
+</head>
+<body>
+    <div layout:fragment="content">
+      <div class="h-100 d-flex gap-2">
+
+        <div class="nav-page d-flex flex-column py-4 px-3 gap-3 align-self-start">
+            <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:href="@{/admin/v1/tour/create-request}">Create Request Tour <i class="fas fa-chevron-right"></i></a>
+            <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:href="@{/admin/v1/tour/view-all-request}">View Request Tour <i class="fas fa-chevron-right"></i></a>
+            <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:href="@{/admin/v1/tour/create}">Create Tour <i class="fas fa-chevron-right"></i></a>
+            <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:href="@{/admin/v1/tour/view-all-tour}">View All Tour <i class="fas fa-chevron-right"></i></a>
+            <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:href="@{/admin/v1/tour/approve}">Approve Tour <i class="fas fa-chevron-right"></i></a>
+          </div>
+
+          <!-- this is a marker of layout:fragment="tour-content" -->
+          <div class="main-content h-100" layout:fragment="tour-content"></div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

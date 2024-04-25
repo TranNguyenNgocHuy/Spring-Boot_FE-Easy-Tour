@@ -1,0 +1,318 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap");
+
+
+:root {
+
+  --primary-color: #53B9EA;
+
+  --gradient-color1: #53B9EA;
+  --gradient-color2: #71A9E9;
+  --gradient-color3: #D2CCE7;
+  --gradient-color4: #6EC6F0;
+
+  --background-primary: #f1f3f5;
+
+
+
+  --gray-icon: #868e96;
+  --gray-border: #E0E0E0;
+
+  --white: #fff;
+
+  --text-color01: #343a40;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--text-color01);
+}
+
+.btn {
+    width: 120px;
+    height: 40px;
+}
+
+.btn-small {
+    width: 80px;
+    height: 30px;
+}
+
+/* ///////////////////////// */
+/* ***** MAIN LAYOUT ***** */
+/* ///////////////////////// */
+
+.wrapper-main {
+    background-color: var(--background-primary);
+}
+
+.header {
+   background-color: transparent;
+   height: 50px;
+}
+
+.header-notification {
+    color: var(--gray-icon);
+    font-size: 20px;
+}
+
+.header-user {
+    height: 28px;
+    width: 28px;
+    border-radius: 50px;
+    border: 2px solid var(--primary-color);
+}
+
+.header-user-icon {
+    color: var(--gray-icon);
+}
+
+.header-user-name {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.body-nav {
+    width: 50px;
+    background-color: var(--white);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+}
+
+.body-nav-btn {
+  height: 30px;
+  width: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all linear 0.2s;
+}
+
+.body-nav-btn i {
+  color: var(--gray-icon);
+}
+
+.body-nav-btn:hover {
+  background-image: linear-gradient(to right, var(--gradient-color1), var(--gradient-color2) 70%, var(--gradient-color3) 100%, var(--gradient-color4) 100%);
+}
+
+.body-nav-btn:hover > i {
+  color: var(--white)
+}
+
+.body-main {
+    width: calc(100% - 50px);
+}
+
+.footer {
+    background-color: var(--white);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+    height: 50px;
+}
+
+.nav-page {
+    width: 210px;
+    background-color: var(--white);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+    flex:1;
+}
+
+.nav-page-btn i {
+   font-size: 12px;
+}
+
+.nav-page-btn a {
+}
+
+.nav-page-btn {
+  height: 35px;
+  width:  100%;
+  padding: 0 5px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--gray-icon);
+  transition: all linear 0.2s;
+}
+
+.nav-page-btn:hover {
+   background-image: linear-gradient(to right, var(--gradient-color1), var(--gradient-color2) 70%, var(--gradient-color3) 100%, var(--gradient-color4) 100%);
+   color: var(--white);
+}
+
+.nav-page-btn:hover > i {
+   color: var(--white);
+}
+
+.main-content {
+    width: calc(100% - 210px)
+}
+
+/* ///////////////////////// */
+/* *** DASHBOARD LAYOUT **** */
+/* ///////////////////////// */
+
+.dashboard-page {
+    background-color: var(--white);
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+}
+
+/* ///////////////////////// */
+/* **** PROFILE LAYOUT **** */
+/* ///////////////////////// */
+
+.profile-view {
+     background-color: var(--white);
+     border-radius: 5px;
+     box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+}
+
+.profile-header-title {
+    border-bottom: 1px solid var(--background-primary);
+    padding-bottom: 5px;
+    height: 40px;
+}
+
+/* ***** PROFILE CREATE ***** */
+
+/* ***** PROFILE VIEW ALL ***** */
+
+
+
+/* ///////////////////////// */
+/* **** TOUR LAYOUT **** */
+/* ///////////////////////// */
+.tour-view {
+     background-color: var(--white);
+     border-radius: 5px;
+     box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+}
+
+.tour-header-title {
+    border-bottom: 1px solid var(--background-primary);
+    padding-bottom: 5px;
+    height: 40px;
+}
+
+/* ***** CREATE REQUEST TOUR ***** */
+
+
+/* ***** VIEW REQUEST TOUR ***** */
+
+
+/* ***** CREATE TOUR ***** */
+
+
+/* ***** VIEW ALL TOUR ***** */
+
+
+/* ***** APPROVE TOUR ***** */
+
+
+
+
+
+
+/* ///////////////////////// */
+/* ****** PRICE LAYOUT ***** */
+/* ///////////////////////// */
+
+.price-view {
+     background-color: var(--white);
+     border-radius: 5px;
+     box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+}
+
+.price-header-title {
+    border-bottom: 1px solid var(--background-primary);
+    padding-bottom: 5px;
+    height: 40px;
+}
+
+
+/* ***** PRICE CREATE ***** */
+.create-price-header {
+    height: 110px;
+    border-bottom: 0.5px solid var(--background-primary);
+}
+
+.price-form {
+    height: 749px;
+    overflow: auto;
+}
+
+.price-item {
+  width: 295px;
+  height: 50px;
+  position: relative;
+}
+
+.price-input {
+    height: 30px;
+    border-radius: 6px;
+    padding: 0 10px;
+    outline: none;
+    border: 0.5px solid var(--gray-border);
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+}
+
+.price-input_unit {
+    position: absolute;
+    left: 91%;
+    top: 8%;
+}
+
+.price-text-error {
+        font-size: 12px;
+}
+
+.create-price-body_first {
+    border-bottom: 0.5px solid var(--background-primary);
+    height: 80px;
+}
+
+.create-price-body_second {
+    border-bottom: 0.5px solid var(--background-primary);
+    height: 240px;
+}
+
+.create-price-body_third {
+    border-bottom: 0.5px solid var(--background-primary);
+    height: 80px;
+}
+
+.create-price-body_fourth {
+    min-height: 150px;
+}
+
+
+/* ***** CREATE LIST ***** */
+
+.price-header-search {
+    width: 35%;
+    height: 35px;
+    border-radius: 10px;
+    padding: 0 5px;
+    outline: none;
+    border: 0.5px solid var(--gray-border);
+
+}
+
+.price-header-search-btn {
+    height: 35px;
+}
+
+
+/* **** CREATE APPROVE **** */

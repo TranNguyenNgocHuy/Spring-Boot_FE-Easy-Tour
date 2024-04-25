@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{price/priceNav.html}"
+        xmlns:th="http://www.thymeleaf.org"
+        lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview Price</title>
+</head>
+<body>
+    <div layout:fragment="price-content">
+        <div class="price-view h-100 w-100 px-4 py-3">
+            <div class="price-header-title w-100">
+                <h5>Preview Price</h5>
+            </div>
+
+            <form th:object="${priceDto}"
+                  class="price-form w-100 d-flex flex-column py-3 px-4">
+
+                <div class="create-price-header row d-flex flex-column justify-content-between px-4">
+                    <div class="price-item w-100">
+                        <label>Tour Code</label>
+                        <div class="h-100">
+                            <input class="price-input"
+                                   type="text"
+                                   placeholder="Enter Tour Code"
+                                   th:value="${priceDto.tourCode}"
+                                   readonly
+                            >
+                        </div>
+                    </div>
+
+                    <div class="w-100 d-flex justify-content-between">
+                        <p class="fw-bold m-0">Class item</p>
+                        <p class="fw-bold m-0">Sub Total</p>
+                    </div>
+                </div>
+
+                <div class="create-price-body_first row px-4 py-2 mb-3">
+                    <div class="col-9 d-flex align-items-center gap-5" >
+
+                        <div class="price-item d-flex justify-content-between align-items-start">
+                            <div class="pt-1">
+                                <label>Coach</label>
+                            </div>
+                            <div class="h-100">
+                                <input class="price-input"
+                                       type="text"
+                                       th:value="${priceDto.coach}"
+                                       readonly
+                                       disabled
+                                >
+                                <span class="price-input_unit text-muted">đ</span>
+                            </div>
+                        </div>
+
+                        <div class="price-item d-flex justify-content-between align-items-start">
+                            <div class="pt-1">
+                                <label>Main Guider</label>
+                            </div>
+                            <div class="h-100">
+                                <input class="price-input"
+                                       type="text"
+                                       value="0"
+                                       th:value="${priceDto.mainGuider}"
+                                       readonly
+                                       disabled
+                                >
+                                <span class="price-input_unit text-muted">đ</span>
+                            </div>
+                        </div>
+
+                        <div class="price-item d-flex justify-content-between align-items-start">
+                            <div class="pt-1">
+                                <label>Local Guider</label>
+                            </div>
+                            <div class="h-100">
+                                <input class="price-input"
+                                       type="text"
+                                       value="0"
+                                       th:value="${priceDto.localGuider}"
+                                       readonly
+                                       disabled
+                                >
+                                <span class="price-input_unit text-muted">đ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3 d-flex align-items-center justify-content-end">
+                        <p class="text-danger fw-semibold my-0" th:text="${allocationCost} + ' đ'"></p>
+                    </div>
+                </div>
+
+                <div class="create-price-body_second row px-4 py-2 mb-3">
+                    <div class="col-9 d-flex justify-content-between flex-column gap-3">
+                        <div class="d-flex align-items-center gap-5" >
+
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Air Ticket</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           value="0"
+                                           th:value="${priceDto.airTicket}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Food</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           value="0"
+                                           th:value="${priceDto.food}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Attraction</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           th:value="${priceDto.attraction}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-5" >
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Insurance</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           th:value="${priceDto.insurance}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Hotel</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           th:value="${priceDto.hotel}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Tax</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           th:value="${priceDto.tax}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center gap-5" >
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Other Price</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           th:value="${priceDto.otherPrice}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+                            <div class="price-item d-flex justify-content-between align-items-start">
+                                <div class="pt-1">
+                                    <label>Visa Fee</label>
+                                </div>
+                                <div class="h-100">
+                                    <input class="price-input"
+                                           type="text"
+                                           th:value="${priceDto.visaFee}"
+                                           readonly
+                                           disabled
+                                    >
+                                    <span class="price-input_unit text-muted">đ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-3 d-flex align-items-start justify-content-end">
+                        <p class="text-danger fw-semibold my-0" th:text="${individualCost} + ' đ'"></p>
+                    </div>
+                </div>
+
+                <div class="create-price-body_third row px-4 py-2 mb-3">
+                    <div class="col-6 d-flex align-items-center gap-5" >
+                        <div class="price-item d-flex justify-content-between align-items-start">
+                            <div class="pt-1">
+                                <label>Adult Price</label>
+                            </div>
+                            <div class="h-100">
+                                <input class="price-input"
+                                       type="text"
+                                       th:value="${priceDto.adult}"
+                                       readonly
+                                       disabled
+                                >
+                                <span class="price-input_unit text-muted">đ</span>
+                            </div>
+                        </div>
+
+                        <div class="price-item d-flex justify-content-between align-items-start">
+                            <div class="pt-1">
+                                <label>Children Price</label>
+                            </div>
+                            <div class="h-100">
+                                <input class="price-input"
+                                       type="text"
+                                       th:value="${priceDto.children}"
+                                       readonly
+                                       disabled
+                                >
+                                <span class="price-input_unit text-muted">đ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 d-flex align-items-center justify-content-end">
+                        <p class="text-danger fw-semibold my-0" th:text="${priceDto.adult} + ' đ'"></p>
+                    </div>
+                </div>
+
+                <div class="create-price-body_fourth">
+                    <div class="h-100 d-flex flex-column justify-content-between align-items-end ">
+                        <div class="d-flex align-items-center gap-2">
+                            <p th:text="${percentProfit}"
+                               class="text-danger m-0 fw-semibold"></p>
+                            <button type="submit" name="action" value="calculate" disabled class="btn btn-warning">Calculate</button>
+                        </div>
+                        <div>
+                            <a th:href="@{/admin/v1/price/view-all-price}" role="button" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>

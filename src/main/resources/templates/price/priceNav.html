@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout.html}"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,23 +14,17 @@
 
   <div class="h-100 d-flex gap-2">
 
-    <div class="priceNav-page d-flex flex-column py-4 px-3 gap-3 align-self-start">
-      <div class="d-flex justify-content-between align-items-center">
-        <a th:href="@{/admin/v1/price/create}">Create Price</a>
-        <i class="fas fa-chevron-right"></i>
-      </div>
-      <div class="d-flex justify-content-between align-items-center">
-        <a th:href="@{/admin/v1/price/view-all-price}">View All Prices</a>
-        <i class="fas fa-chevron-right"></i>
-      </div>
-      <div class="d-flex justify-content-between align-items-center">
-        <a th:href="@{/admin/v1/price/approve}">Approve Price</a>
-        <i class="fas fa-chevron-right"></i>
-      </div>
+    <div class="nav-page d-flex flex-column py-4 px-3 gap-3 align-self-start">
+        <a class="nav-page-btn d-flex justify-content-between align-items-center"
+           th:href="@{/admin/v1/price/create}">Create Price  <i class="fas fa-chevron-right"></i></a>
+        <a class="nav-page-btn d-flex justify-content-between align-items-center"
+           th:href="@{/admin/v1/price/view-all-price}">View All Prices <i class="fas fa-chevron-right"></i></a>
+        <a class="nav-page-btn d-flex justify-content-between align-items-center"
+           th:href="@{/admin/v1/price/approve}">Approve Price <i class="fas fa-chevron-right"></i></a>
     </div>
 
-    <!-- Đây là nơi sẽ thay đổi nội dung đc đánh dấu layout:fragment="price-content" -->
-    <div class="price-content h-100" layout:fragment="price-content">
+    <!-- this is a marker of layout:fragment="price-content" -->
+    <div class="main-content h-100" layout:fragment="price-content">
 
     </div>
 
