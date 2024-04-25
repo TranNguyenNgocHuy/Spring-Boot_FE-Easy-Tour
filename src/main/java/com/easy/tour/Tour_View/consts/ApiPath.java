@@ -2,32 +2,8 @@ package com.easy.tour.Tour_View.consts;
 
 public interface ApiPath {
 
-    String API_BASE_URL = "/admin/v1";
-    //http://localhost:8081/admin/v1
-
-    // VIEW //
-    String DASH_BOARD = API_BASE_URL + "/";
-
-    String PRICE_NAV_PAGE = API_BASE_URL + "/price";
-
-    String PRICE_APPROVE_PAGE = API_BASE_URL + "/price/approve";
-
-    String PRICE_CREATE_PAGE = API_BASE_URL + "/price/create";
-
-    String PRICE_VIEW_ALL_PAGE = API_BASE_URL + "/price/view-all-price";
-
-    String PRICE_PREVIEW = API_BASE_URL + "/price/preview-price";
-
-    String PRICE_EDIT = API_BASE_URL + "/price/edit";
-    String PRICE_DELETE = API_BASE_URL + "/price/edit";
-
-
-
     String API = "http://localhost:8080/api/v1";
     //http://localhost:8080/api/v1
-
-    //Ping
-    String PING = API + "/ping";
 
     //User
     String USER_LOGIN = API + "/login";
@@ -44,6 +20,6 @@ public interface ApiPath {
     String PRICE_GET_BY_TOUR_CODE = API + "/price/";
     String PRICE_CREATE = API + "/price/create-price";
     String PRICE_UPDATE = API + "/price/update/";
-    String PRICE_DELETE_API = API + "/price/delete/";
+    String PRICE_DELETE = API + "/price/delete/";
     // end
 }

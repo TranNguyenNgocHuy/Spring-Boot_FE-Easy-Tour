@@ -1,6 +1,7 @@
 package com.easy.tour.Tour_View.controller;
 
 import com.easy.tour.Tour_View.consts.ApiPath;
+import com.easy.tour.Tour_View.consts.UrlPath;
 import com.easy.tour.Tour_View.dto.PriceDTO;
 import com.easy.tour.Tour_View.response.PriceResponseDTO;
 import com.easy.tour.Tour_View.service.PriceService;
@@ -26,21 +27,34 @@ public class PriceController {
     @Autowired
     PriceService service;
 
-    @GetMapping(value = ApiPath.PRICE_NAV_PAGE)
+    @GetMapping(value = UrlPath.PRICE_NAV_PAGE)
     public String priceNav() {
         return "price/priceNav";
     }
 
 
-    @GetMapping(value = ApiPath.PRICE_CREATE_PAGE)
+    @GetMapping(value = UrlPath.PRICE_CREATE_PAGE)
     public String priceCreatePage(Model model) {
         PriceDTO priceDTO = new PriceDTO();
         model.addAttribute("priceDto", priceDTO);
         return "price/priceCreate";
     }
 
+    @GetMapping(value = UrlPath.PRICE_VIEW_ALL_PAGE)
+    public String viewPricePage(Model model) {
+        // Send request to take data from URL with header = null
+        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_All, PriceResponseDTO.class);
+        model.addAttribute("priceDtoList", response.getList());
+        return "price/priceViewAll";
+    }
 
-    @PostMapping(value = ApiPath.PRICE_CREATE_PAGE, params = "action")
+    @GetMapping(value = UrlPath.PRICE_APPROVE_PAGE)
+    public String priceView() {
+        return "price/priceApprove";
+    }
+
+
+    @PostMapping(value = UrlPath.PRICE_CREATE_PAGE, params = "action")
     public String priceCreateSubmit(
             @RequestParam(value="action", required = true) String action,
             Model model,
@@ -49,7 +63,7 @@ public class PriceController {
 
         boolean showProfit = false;
         if (action.equals("cancel")) {
-            return "redirect:" + ApiPath.PRICE_VIEW_ALL_PAGE;
+            return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
         }
 
         if (result.hasErrors()) {
@@ -83,24 +97,11 @@ public class PriceController {
             PriceResponseDTO response = restTemplateUtils.postData(requestEntity, ApiPath.PRICE_CREATE, PriceResponseDTO.class);
             log.info("message: {}", response.getMessage());
         }
-        return "redirect:" + ApiPath.PRICE_VIEW_ALL_PAGE;
+        return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
     }
 
 
-    @GetMapping(value = ApiPath.PRICE_VIEW_ALL_PAGE)
-    public String getAllPriceList(Model model) {
-        // Send request to take data from URL with header = null
-        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_All, PriceResponseDTO.class);
-        model.addAttribute("priceDtoList", response.getList());
-        return "price/priceViewAll";
-    }
-
-    @GetMapping(value = ApiPath.PRICE_APPROVE_PAGE)
-    public String priceView() {
-        return "price/priceApprove";
-    }
-
-    @GetMapping(value = ApiPath.PRICE_PREVIEW)
+    @GetMapping(value = UrlPath.PRICE_PREVIEW)
     public String pricePreview(Model model,
                                @RequestParam("tourCode") String tourCode
                                ) {
@@ -118,7 +119,7 @@ public class PriceController {
         return "price/pricePreview";
     }
 
-    @GetMapping(value = ApiPath.PRICE_EDIT)
+    @GetMapping(value = UrlPath.PRICE_EDIT)
     public String priceEditPage(Model model,
                                 @RequestParam("tourCode") String tourCode
                             ) {
@@ -136,7 +137,7 @@ public class PriceController {
         return "price/priceEdit";
     }
 
-    @PostMapping(value = ApiPath.PRICE_EDIT, params = "action")
+    @PostMapping(value = UrlPath.PRICE_EDIT, params = "action")
     public String priceSubmitEdit(
             @RequestParam(value="action", required = true) String action,
             Model model,
@@ -146,7 +147,7 @@ public class PriceController {
 
         // submit delete
         if (action.equals("cancel")) {
-            return "redirect:" + ApiPath.PRICE_VIEW_ALL_PAGE;
+            return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
         }
 
         // Binding result
@@ -177,11 +178,11 @@ public class PriceController {
             PriceResponseDTO response = restTemplateUtils.putData(requestEntity, ApiPath.PRICE_UPDATE + priceDto.getTourCode(), PriceResponseDTO.class);
             log.info("message: {}", response.getMessage());
         }
-        return "redirect:" + ApiPath.PRICE_VIEW_ALL_PAGE;
+        return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
     }
 
 
-//    @GetMapping(value = ApiPath.PRICE_DELETE)
+//    @GetMapping(value = UrlPath.PRICE_DELETE)
 //    public String deletePrice(
 //            @RequestParam("tourCode") String tourCode
 //    ) {
@@ -190,7 +191,7 @@ public class PriceController {
 //            HttpEntity<?> requestEntity = restTemplateUtils.setHeaderDefault(tourCode);
 //
 //            // Delete price
-//            PriceResponseDTO responseDTO = restTemplateUtils.deleteData(requestEntity, ApiPath.PRICE_DELETE_API + tourCode, PriceResponseDTO.class);
+//            PriceResponseDTO responseDTO = restTemplateUtils.deleteData(requestEntity, ApiPath.PRICE_DELETE + tourCode, PriceResponseDTO.class);
 //            log.info("message: {}", responseDTO.getMessage());
 //
 //            return "redirect:" + ApiPath.PRICE_VIEW_ALL_PAGE;
