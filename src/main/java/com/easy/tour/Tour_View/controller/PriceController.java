@@ -28,7 +28,9 @@ public class PriceController {
     PriceService service;
 
     @GetMapping(value = UrlPath.PRICE_NAV_PAGE)
-    public String priceNav() {
+    public String priceNav(Model model) {
+
+        model.addAttribute("activeNav", "price");
         return "price/priceNav";
     }
 
@@ -36,6 +38,9 @@ public class PriceController {
     @GetMapping(value = UrlPath.PRICE_CREATE_PAGE)
     public String priceCreatePage(Model model) {
         PriceDTO priceDTO = new PriceDTO();
+
+        model.addAttribute("activeNav", "price");
+        model.addAttribute("activeTab", "priceCreate");
         model.addAttribute("priceDto", priceDTO);
         return "price/priceCreate";
     }
@@ -44,12 +49,18 @@ public class PriceController {
     public String viewPricePage(Model model) {
         // Send request to take data from URL with header = null
         PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_All, PriceResponseDTO.class);
+
+        model.addAttribute("activeNav", "price");
+        model.addAttribute("activeTab", "priceView");
         model.addAttribute("priceDtoList", response.getList());
         return "price/priceViewAll";
     }
 
     @GetMapping(value = UrlPath.PRICE_APPROVE_PAGE)
-    public String priceView() {
+    public String priceApprove(Model model) {
+
+        model.addAttribute("activeNav", "price");
+        model.addAttribute("activeTab", "priceApprove");
         return "price/priceApprove";
     }
 

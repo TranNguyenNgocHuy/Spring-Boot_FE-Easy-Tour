@@ -13,15 +13,18 @@
 <div layout:fragment="content">
     <div class="h-100 d-flex gap-2">
 
-        <div class="nav-page d-flex flex-column py-4 px-3 gap-3 align-self-start">
+        <div class="nav-page d-flex flex-column p-4 gap-3 align-self-start">
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:classappend="${activeTab == 'profileCreate'} ? 'active'"
                th:href="@{/admin/v1/profile/create}">Create User Profile <i class="fas fa-chevron-right"></i></a>
+
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:classappend="${activeTab == 'profileView'} ? 'active'"
                th:href="@{/admin/v1/profile/view-all-profile}">View User Profile <i class="fas fa-chevron-right"></i></a>
         </div>
 
         <!-- this is a marker of layout:fragment="profile-content" -->
-        <div class="main-content h-100" layout:fragment="profile-content"></div>
+        <div class="main-content" layout:fragment="profile-content"></div>
 
     </div>
 </div>

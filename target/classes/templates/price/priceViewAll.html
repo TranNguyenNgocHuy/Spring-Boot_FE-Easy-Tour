@@ -47,18 +47,18 @@
                     <td class="text-center" th:text="${priceDto.approvalDate}"></td>
                     <td class="fw-semibold text-primary text-center" th:text="${priceDto.approvalStatus}"></td>
                     <td class="d-flex justify-content-center gap-1 ">
-                        <a class="btn btn-primary btn-small"
+                        <a class="btn btn-primary btn-small d-flex justify-content-center align-items-center"
                            role="button"
                            th:href="@{/admin/v1/price/preview-price(tourCode=${priceDto.tourCode})}"
-                        >View</a>
-                        <a class="btn btn-success btn-small"
+                        ><i class="fa-regular fa-eye"></i></a>
+                        <a class="btn btn-success btn-small d-flex justify-content-center align-items-center"
                            role="button"
                            th:href="@{/admin/v1/price/edit(tourCode=${priceDto.tourCode})}"
-                        >Amend</a>
-                        <a class="btn btn-danger btn-small"
+                        ><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger btn-small d-flex justify-content-center align-items-center"
                            role="button"
                            th:href="@{/admin/v1/price/delete(tourCode=${priceDto.tourCode})}"
-                        >Delete</a>
+                        ><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
                 </tbody>
