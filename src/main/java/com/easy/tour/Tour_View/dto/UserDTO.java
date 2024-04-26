@@ -19,5 +19,9 @@ public class UserDTO extends BaseObject {
 
     private String password;
 
+    private Boolean gender;
+
+    private Integer phoneNumber;
+
     private int roleName; // (1 admin, 2 user, 3 manager)
 }

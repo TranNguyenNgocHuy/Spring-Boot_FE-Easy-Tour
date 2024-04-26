@@ -12,21 +12,30 @@
     <div layout:fragment="content">
       <div class="h-100 d-flex gap-2">
 
-        <div class="nav-page d-flex flex-column py-4 px-3 gap-3 align-self-start">
+        <div class="nav-page d-flex flex-column p-4 gap-3 align-self-start">
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:classappend="${activeTab == 'createRequest'} ? 'active'"
                th:href="@{/admin/v1/tour/create-request}">Create Request Tour <i class="fas fa-chevron-right"></i></a>
+
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:classappend="${activeTab == 'viewRequest'} ? 'active'"
                th:href="@{/admin/v1/tour/view-all-request}">View Request Tour <i class="fas fa-chevron-right"></i></a>
+
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:classappend="${activeTab == 'createTour'} ? 'active'"
                th:href="@{/admin/v1/tour/create}">Create Tour <i class="fas fa-chevron-right"></i></a>
+
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:classappend="${activeTab == 'viewTour'} ? 'active'"
                th:href="@{/admin/v1/tour/view-all-tour}">View All Tour <i class="fas fa-chevron-right"></i></a>
+
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
+               th:classappend="${activeTab == 'approveTour'} ? 'active'"
                th:href="@{/admin/v1/tour/approve}">Approve Tour <i class="fas fa-chevron-right"></i></a>
           </div>
 
           <!-- this is a marker of layout:fragment="tour-content" -->
-          <div class="main-content h-100" layout:fragment="tour-content"></div>
+          <div class="main-content" layout:fragment="tour-content"></div>
         </div>
       </div>
     </div>

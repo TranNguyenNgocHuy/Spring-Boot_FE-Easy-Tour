@@ -14,17 +14,22 @@
 
   <div class="h-100 d-flex gap-2">
 
-    <div class="nav-page d-flex flex-column py-4 px-3 gap-3 align-self-start">
+    <div class="nav-page d-flex flex-column p-4 gap-3 align-self-start">
+
         <a class="nav-page-btn d-flex justify-content-between align-items-center"
+           th:classappend="${activeTab == 'priceCreate'} ? 'active'"
            th:href="@{/admin/v1/price/create}">Create Price  <i class="fas fa-chevron-right"></i></a>
+
         <a class="nav-page-btn d-flex justify-content-between align-items-center"
+           th:classappend="${activeTab == 'priceView'} ? 'active'"
            th:href="@{/admin/v1/price/view-all-price}">View All Prices <i class="fas fa-chevron-right"></i></a>
+
         <a class="nav-page-btn d-flex justify-content-between align-items-center"
+           th:classappend="${activeTab == 'priceApprove'} ? 'active'"
            th:href="@{/admin/v1/price/approve}">Approve Price <i class="fas fa-chevron-right"></i></a>
     </div>
-
     <!-- this is a marker of layout:fragment="price-content" -->
-    <div class="main-content h-100" layout:fragment="price-content">
+    <div class="main-content" layout:fragment="price-content">
 
     </div>
 
