@@ -2,6 +2,7 @@ package com.easy.tour.Tour_View.controller;
 
 
 import com.easy.tour.Tour_View.consts.UrlPath;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @Slf4j
 public class EasyTourController {
-
     /* **** PING **** */
     @GetMapping(value = UrlPath.PING)
     public String ping() {
         return "start easy tour!!!!";
     }
-
 
 
     /* **** DASH BOARD **** */
@@ -28,8 +27,12 @@ public class EasyTourController {
     }
 
     @GetMapping(value = UrlPath.DASH_BOARD)
-    public String homePage(Model model) {
-
+    public String homePage(Model model,
+                           HttpSession session
+    ) {
+        String email = (String) session.getAttribute("userEmail");
+        System.out.println(email);
+        model.addAttribute("email", email);
         model.addAttribute("activeNav", "dashboard");
         return "dashboard";
     }

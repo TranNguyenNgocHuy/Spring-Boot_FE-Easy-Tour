@@ -7,6 +7,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -23,10 +24,6 @@ public class PriceDTO extends BaseObject {
     @NotEmpty(message = "You must enter Tour Code field.")
     private String tourCode;
 
-    private String creator;
-    private Date createDate;
-    private String approvedBy;
-    private Date approvalDate;
     private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_OP;
 
     @Min(value = 0, message = "The value must be >= 0.")
@@ -80,4 +77,16 @@ public class PriceDTO extends BaseObject {
     @Min(value = 1, message = "The value must be >= 1.")
     @NotNull(message = "The value must be numeric.")
     private BigDecimal children;
+
+    private String creator;
+
+    private String createDate;
+
+    private String modifiedDate;
+
+    private String modifiedBy;
+
+    private String approvedBy;
+
+    private String approvalDate;
 }

@@ -11,6 +11,18 @@
 <body>
     <div layout:fragment="tour-content">
         <div class="tour-view h-100 w-100 px-4 py-3">
+            <div class="price-header w-100 d-flex justify-content-between align-items-center mb-2">
+                <div class="h-100 w-50 d-flex align-items-center gap-2 mb-4">
+                    <input class="price-header-search"
+                           type="search"
+                           placeholder="Find Tour Code"
+                    />
+                    <button class="price-header-search-btn btn btn-primary"
+                            type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>Search
+                    </button>
+                </div>
+            </div>
             <div class="tour-header-title w-100">
                 <h5>View All Tour</h5>
             </div>
@@ -18,24 +30,35 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th class="text-center" scope="col">?</th>
-                    <th class="text-center" scope="col">?</th>
-                    <th class="text-center" scope="col">?</th>
-                    <th class="text-center" scope="col">?</th>
-                    <th class="text-center" scope="col">?</th>
-                    <th class="text-center" scope="col">?</th>
-                    <th class="text-center" scope="col">?</th>
+                    <th class="text-center" scope="col">Tour Code</th>
+                    <th class="text-center" scope="col">Tour Name</th>
+                    <!-- <th class="text-center" scope="col">Creator</th>-->
+                    <!-- <th class="text-center" scope="col">Create Date</th>-->
+                    <!-- <th class="text-center" scope="col">Approved By</th>-->
+                    <!-- <th class="text-center" scope="col">Approved Date</th>-->
+                    <!-- <th class="text-center" scope="col">Status</th>-->
+                    <th class="text-center" scope="col">Action</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody th:each="tourDto : ${tourDtoList}">
                 <tr>
-                    <td class="text-center" >?</td>
-                    <td class="text-center" >?</td>
-                    <td class="text-center" >?</td>
-                    <td class="text-center" >?</td>
-                    <td class="text-center" >?</td>
-                    <td class="text-center" >?</td>
-                    <td class="text-center" >?</td>
+                    <td class="text-center" th:text="${tourDto.tourCode}"></td>
+                    <td class="text-center" th:text="${tourDto.tourName}"></td>
+                    <!-- <td class="text-center" th:text="${tourDto.createdDate}"></td>-->
+                    <!-- <td class="text-center" th:text="${tourDto.modifiedDate}"></td>-->
+                    <!-- <td class="text-center" th:text="${tourDto.createdBy}"></td>-->
+                    <!-- <td class="text-center" th:text="${tourDto.modifiedBy}"></td>-->
+                    <!--                <td class="fw-semibold text-primary text-center" th:text=""></td>-->
+                    <td class="d-flex justify-content-center gap-1 ">
+                        <a class="btn btn-success btn-small d-flex justify-content-center align-items-center"
+                           role="button"
+                           th:href="@{/admin/v1/tour/edit(tourCode=${tourDto.tourCode})}"
+                        ><i class="fa-regular fa-pen-to-square"></i></a>
+                        <a class="btn btn-danger btn-small d-flex justify-content-center align-items-center"
+                           role="button"
+                           th:href="@{/admin/v1/tour/delete(tourCode=${tourDto.tourCode})}"
+                        ><i class="fa-solid fa-trash-can"></i></a>
+                    </td>
                 </tr>
                 </tbody>
             </table>

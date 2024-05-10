@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{price/priceNav.html}"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Edit</title></head>
+<body>
+<div layout:fragment="price-content">
+    <div class="price-view h-100 w-100 px-4 py-3">
+        <div class="price-header-title w-100"><h5>Edit Tour</h5></div>
+        <form action="/admin/v1/tour/edit" method="post" th:object="${tourDto}">
+            <div style="display: flex; align-items: flex-start;">
+                <div style="flex: 35%; margin-right: 20px;">
+                    <div class="price-item w-100"><label>Tour Code</label>
+                        <div class="h-100"><input class="price-input" type="text" th:field="${tourDto.tourCode}"
+                                                  readonly disabled> <input type="hidden"
+                                                                            th:field="${tourDto.tourCode}"/></div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="tourName">Tour Name:</label>
+                        <input type="text" th:field="${tourDto.tourName}" id="tourName"
+                               style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="maximumSize">Maximum Size:</label>
+                        <select th:field="${tourDto.maximumSize}" id="maximumSize"
+                                style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
+                            <option th:each="size : ${#numbers.sequence(1, 100)}" th:value="${size}"
+                                    th:text="${size}"></option>
+                        </select>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button type="submit" name="action" value="cancel"
+                                style="padding: 10px 20px; margin-right: 10px; background-color: #eee; border: none; border-radius: 3px;">
+                            Cancel
+                        </button>
+                        <button type="submit" name="action" value="update"
+                                style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 3px;">
+                            Update
+                        </button>
+                    </div>
+                </div>
+
+                <div style="flex: 65%;">
+                    <div style="margin-bottom: 20px;">
+                        <label for="description">Description:</label>
+                        <textarea th:field="${tourDto.description}" rows="6" id="description"
+                                  style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc; resize: vertical;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,6 +1,7 @@
 package com.easy.tour.Tour_View.utils;
 
 import com.google.gson.Gson;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -17,12 +18,18 @@ public class RestTemplateUtils {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    GetJwtToken getJwtToken;
+
     /**
      * @return
      */
-    public HttpEntity<?> setHeaderDefault(Object data) {
+    public HttpEntity<?> setHeaderDefault(Object data, HttpServletRequest request) {
+        String jwtToken = getJwtToken.extractTokenFromCookie(request);
+
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.add("Authorization", "Bearer " + jwtToken);
 
         return data == null ? new HttpEntity<>(headers) : new HttpEntity<>(data, headers);
     }
@@ -33,8 +40,8 @@ public class RestTemplateUtils {
      * @param clazz
      * @return
      */
-    public <T> T getData(String url, Class<?> clazz) {
-        return getData(setHeaderDefault(null), url, clazz);
+    public <T> T getData(String url, HttpServletRequest request, Class<?> clazz) {
+        return getData(setHeaderDefault(null, request), url, clazz);
     }
 
     /**
@@ -47,7 +54,6 @@ public class RestTemplateUtils {
     public <T> T getData(HttpEntity<?> entity, String url, Class<?> clazz) {
         String data = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
         Gson gson = new Gson();
-
         return (T) gson.fromJson(data, clazz);
     }
 
@@ -57,8 +63,8 @@ public class RestTemplateUtils {
      * @param <T>
      * @return
      */
-    public <T> T postData(Object data, String url, Class<?> clazz) {
-        return postData(setHeaderDefault(data), url, clazz);
+    public <T> T postData(Object data, String url, HttpServletRequest request, Class<?> clazz) {
+        return postData(setHeaderDefault(data, request), url, clazz);
     }
 
     /**
@@ -81,8 +87,8 @@ public class RestTemplateUtils {
      * @param <T>
      * @return
      */
-    public <T> T putData(Object data, String url, Class<?> clazz) {
-        return putData(setHeaderDefault(data), url, clazz);
+    public <T> T putData(Object data, String url, HttpServletRequest request,Class<?> clazz) {
+        return putData(setHeaderDefault(data, request), url, clazz);
     }
 
     /**
@@ -105,8 +111,8 @@ public class RestTemplateUtils {
      * @param <T>
      * @return
      */
-    public <T> T deleteData(Object data, String url, Class<?> clazz) {
-        return deleteData(setHeaderDefault(data), url, clazz);
+    public <T> T deleteData(Object data, String url, HttpServletRequest request,Class<?> clazz) {
+        return deleteData(setHeaderDefault(data, request), url, clazz);
     }
 
     /**
@@ -117,11 +123,10 @@ public class RestTemplateUtils {
      * @return
      */
     public <T> T deleteData(HttpEntity<?> entity, String url, Class<?> clazz) {
-        String data = restTemplate.exchange(url, HttpMethod.PUT, entity, String.class).getBody();
+        String data = restTemplate.exchange(url, HttpMethod.DELETE, entity, String.class).getBody();
         Gson gson = new Gson();
 
         return (T) gson.fromJson(data, clazz);
     }
-
     //end
 }

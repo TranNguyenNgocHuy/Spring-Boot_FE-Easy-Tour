@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{loginLayout.html}"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Form</title>
+</head>
+<body>
+    <div class="w-100 h-100" layout:fragment="login-content">
+        <form th:action="@{${LOGIN_PAGE}}"
+              method="post"
+              th:object="${authenticationDTO}"
+              class="h-100 d-flex flex-column justify-content-center align-items-center gap-4">
+
+            <div class="login-item">
+                <input  class="login-input"
+                        type="text"
+                        placeholder="Email"
+                        th:field="${authenticationDTO.email}">
+                <p th:if="${#fields.hasErrors('email')}"
+                   th:errorclass="input-text-error"
+                   th:errors="${authenticationDTO.email}"
+                ></p>
+            </div >
+
+            <div class="login-item">
+                <input class="login-input"
+                       type="password"
+                       placeholder="Password"
+                       th:field="${authenticationDTO.password}">
+                <p th:if="${#fields.hasErrors('password')}"
+                   th:errorclass="input-text-error"
+                   th:errors="${authenticationDTO.password}"
+                ></p>
+            </div>
+
+            <div class="login-item d-flex flex-column align-items-end">
+                <a th:href="@{/admin/v1/forgot-password}" class="link-forgot-password">Forgot Password ?</a>
+                <div class="w-100 h-100 d-flex justify-content-center align-items-end">
+                    <p th:if="${errorLogin != null}"
+                       th:text="${errorLogin}"
+                       class="input-text-error"></p>
+                </div>
+            </div>
+
+            <div class="login-item">
+                <button class="btn-login d-flex justify-content-center align-items-center" type="submit">Sign in</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
