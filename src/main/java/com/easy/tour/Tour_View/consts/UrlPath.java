@@ -7,6 +7,12 @@ public interface UrlPath {
     //Ping
     String PING = BASE_URL + "/ping";
 
+    // LOGIN //
+    String LOGIN_PAGE = BASE_URL + "/login";
+    String FORGOT_PASSWORD_PAGE = BASE_URL + "/forgot-password";
+    String LOGOUT = BASE_URL + "/logout";
+
+
     // DASH_BOARD //
     String DASH_BOARD = BASE_URL + "/";
 
@@ -22,15 +28,23 @@ public interface UrlPath {
     // TOUR //
     String TOUR_NAV_PAGE = BASE_URL + "/tour";
 
+    // tour request
     String TOUR_CREATE_REQUEST_PAGE = BASE_URL + "/tour/create-request";
 
     String TOUR_VIEW_REQUEST_PAGE = BASE_URL + "/tour/view-all-request";
 
+    String TOUR_EDIT_REQUEST_PAGE = BASE_URL + "/tour/edit-request/uuid";
+
+    String TOUR_DELETE_REQUEST = BASE_URL + "/tour/delete-request/uuid";
+
+    // tour
     String TOUR_CREATE_PAGE = BASE_URL + "/tour/create";
 
-    String TOUR_VIEW_PAGE = BASE_URL + "/tour/view-all-tour";
+    String TOUR_VIEW_ALL_PAGE = BASE_URL + "/tour/view-all-tour";
 
     String TOUR_APPROVE_PAGE = BASE_URL + "/tour/approve";
+
+    String TOUR_EDIT = BASE_URL + "/tour/edit";
 
 
 
@@ -47,5 +61,5 @@ public interface UrlPath {
 
     String PRICE_EDIT = BASE_URL + "/price/edit";
 
-    String PRICE_DELETE = BASE_URL + "/price/edit";
+    String PRICE_DELETE = BASE_URL + "/price/delete";
 }

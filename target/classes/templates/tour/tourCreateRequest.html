@@ -15,7 +15,23 @@
                 <h5>Create Request Tour</h5>
             </div>
 
-            Continue writing content here
+            <div class="row" >
+                <form  method="post" action="/admin/v1/tour/create-request" enctype="multipart/form-data" th:object="${tourRequestDTO}">
+                    <div class="form-group row my-4">
+                        <label class="col-sm-2 col-form-label" for="description">Description </label>
+                        <div class="col-sm-10">
+                            <input th:field="${tourRequestDTO.description}" type="text" class="form-control" id="description" >
+                        </div>
+                    </div>
+                    <div class="h-50 d-flex flex-row justify-content-end align-items-end gap-4">
+                        <button type="submit" name="action" value="create" class="btn btn-primary">Submit</button>
+                        <a type="button"
+                           th:href="@{/admin/v1/tour/view-all-request}"
+                           class="btn btn-outline-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 

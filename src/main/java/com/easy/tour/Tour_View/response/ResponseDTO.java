@@ -1,5 +1,6 @@
 package com.easy.tour.Tour_View.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,6 @@ import java.util.List;
 @Setter
 public class ResponseDTO<T> implements Serializable {
     public String message;
-    @JsonProperty("error_code")
     public Integer errorCode;
     public T data;
     public List<T> list;

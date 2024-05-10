@@ -10,15 +10,20 @@
   --gradient-color3: #D2CCE7;
   --gradient-color4: #6EC6F0;
 
+  --background-login-page-gradient-color1: rgb(83, 185, 234, 0.6);
+  --background-login-page-gradient-color2: rgb(249, 212, 35, 0.5);
+  --background-login-page-gradient-color3: rgb(155, 225, 93, 0.4);
+  --background-login-page-gradient-color4: rgb(231, 235, 240, 0.2);
+
   --background-primary: #f1f3f5;
-
-
+  --background-login-form: rgb(73, 80, 87, 0.4);
 
   --gray-icon: #868e96;
   --gray-border: #E0E0E0;
 
   --white: #fff;
 
+  --text-color-light: #f8f9fa;
   --text-color01: #343a40;
 }
 
@@ -41,6 +46,109 @@ body {
 .btn-small {
     width: 30px;
     height: 30px;
+}
+
+/* ///////////////////////// */
+/* ***** LOGIN PAGE ***** */
+/* ///////////////////////// */
+.login-background {
+    background-image: url("../img/login-background.jpg");
+    background-position: center;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    filter: blur(5px);
+}
+
+.login-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    padding-left: 50px;
+    background-image: linear-gradient(150deg,
+                                          var(--background-login-page-gradient-color1),
+                                          var(--background-login-page-gradient-color2) 50%,
+                                          var(--background-login-page-gradient-color3) 80%,
+                                          var(--background-login-page-gradient-color4) 100%);
+}
+
+.login-form{
+    width: 45%;
+    height: 550px;
+    border-radius: 5px;
+    background-color: var(--background-login-form);
+}
+
+.login-header {
+    color: var(--text-color-light);
+}
+
+.login-body {
+
+
+}
+
+.login-footer {
+    color: var(--text-color-light);
+}
+
+.login-item {
+    width: 75%;
+    height: 80px;
+}
+
+.login-input {
+    width: 100%;
+    height: 70px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    border-bottom: 2.5px solid var(--text-color-light);
+    padding: 10pxl;
+    outline: none;
+    color: var(--text-color-light);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.login-input::placeholder {
+    color: var(--text-color-light);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.input-text-error {
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffc9c9;
+}
+
+.link-forgot-password {
+    color: var(--text-color-light);
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-login {
+    width: 100%;
+    height: 40px;
+    border: 2.5px solid var(--text-color-light);
+    border-radius: 5px;
+    color: var(--text-color-light);
+    font-size: 22px;
+    font-weight: 600;
+    transition: all linear 0.2s;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.btn-login:hover {
+    background-color: var(--text-color-light);
+    color: #495057;
 }
 
 /* ///////////////////////// */

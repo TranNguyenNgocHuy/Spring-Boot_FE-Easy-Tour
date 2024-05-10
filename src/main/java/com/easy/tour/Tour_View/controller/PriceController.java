@@ -5,7 +5,9 @@ import com.easy.tour.Tour_View.consts.UrlPath;
 import com.easy.tour.Tour_View.dto.PriceDTO;
 import com.easy.tour.Tour_View.response.PriceResponseDTO;
 import com.easy.tour.Tour_View.service.PriceService;
+import com.easy.tour.Tour_View.utils.ParserDateTimeUtils;
 import com.easy.tour.Tour_View.utils.RestTemplateUtils;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ import java.math.BigDecimal;
 public class PriceController {
 
     @Autowired
+    ParserDateTimeUtils parserDateTime;
+
+    @Autowired
     RestTemplateUtils restTemplateUtils;
 
     @Autowired
@@ -29,16 +34,12 @@ public class PriceController {
 
     @GetMapping(value = UrlPath.PRICE_NAV_PAGE)
     public String priceNav(Model model) {
-
         model.addAttribute("activeNav", "price");
         return "price/priceNav";
     }
-
-
     @GetMapping(value = UrlPath.PRICE_CREATE_PAGE)
     public String priceCreatePage(Model model) {
         PriceDTO priceDTO = new PriceDTO();
-
         model.addAttribute("activeNav", "price");
         model.addAttribute("activeTab", "priceCreate");
         model.addAttribute("priceDto", priceDTO);
@@ -46,13 +47,22 @@ public class PriceController {
     }
 
     @GetMapping(value = UrlPath.PRICE_VIEW_ALL_PAGE)
-    public String viewPricePage(Model model) {
+    public String viewPricePage(Model model,
+                                HttpServletRequest request
+    ) {
         // Send request to take data from URL with header = null
-        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_All, PriceResponseDTO.class);
+        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_All, request, PriceResponseDTO.class);
+
+        for (PriceDTO priceDTO: response.getList()) {
+           priceDTO.setCreateDate(parserDateTime.format(priceDTO.getCreateDate()));
+           priceDTO.setModifiedDate(parserDateTime.format((priceDTO.getModifiedDate())));
+           priceDTO.setApprovalDate(parserDateTime.format((priceDTO.getApprovalDate())));
+        }
 
         model.addAttribute("activeNav", "price");
         model.addAttribute("activeTab", "priceView");
         model.addAttribute("priceDtoList", response.getList());
+        System.out.println(response.getList());
         return "price/priceViewAll";
     }
 
@@ -66,12 +76,12 @@ public class PriceController {
 
 
     @PostMapping(value = UrlPath.PRICE_CREATE_PAGE, params = "action")
-    public String priceCreateSubmit(
-            @RequestParam(value="action", required = true) String action,
-            Model model,
-            @Valid @ModelAttribute("priceDto") PriceDTO priceDto,
-            BindingResult result) {
-
+    public String priceCreateSubmit(@RequestParam(value="action", required = true) String action,
+                                    Model model,
+                                    HttpServletRequest request,
+                                    @Valid @ModelAttribute("priceDto") PriceDTO priceDto,
+                                    BindingResult result
+    ) {
         boolean showProfit = false;
         if (action.equals("cancel")) {
             return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
@@ -86,7 +96,6 @@ public class PriceController {
             BigDecimal allocationCost = service.calculateAllocationCost(priceDto);
             BigDecimal individualCost = service.calculateIndividualCost(priceDto);
             BigDecimal percentProfit = service.calculateProfitAdult(priceDto);
-
             if (percentProfit != null) {
                 showProfit = true;
             }
@@ -101,11 +110,8 @@ public class PriceController {
 
         // submit create price
         if (action.equals("create")) {
-            // Create HttpEntity with data = objectDto
-            HttpEntity<?> requestEntity = restTemplateUtils.setHeaderDefault(priceDto);
-
             // Send data to BE and receive response
-            PriceResponseDTO response = restTemplateUtils.postData(requestEntity, ApiPath.PRICE_CREATE, PriceResponseDTO.class);
+            PriceResponseDTO response = restTemplateUtils.postData(priceDto, ApiPath.PRICE_CREATE, request, PriceResponseDTO.class);
             log.info("message: {}", response.getMessage());
         }
         return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
@@ -114,9 +120,10 @@ public class PriceController {
 
     @GetMapping(value = UrlPath.PRICE_PREVIEW)
     public String pricePreview(Model model,
+                               HttpServletRequest request,
                                @RequestParam("tourCode") String tourCode
                                ) {
-        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_BY_TOUR_CODE + tourCode, PriceResponseDTO.class);
+        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_BY_TOUR_CODE + tourCode, request, PriceResponseDTO.class);
         PriceDTO priceDto = response.getData();
 
         BigDecimal allocationCost = service.calculateAllocationCost(priceDto);
@@ -132,9 +139,10 @@ public class PriceController {
 
     @GetMapping(value = UrlPath.PRICE_EDIT)
     public String priceEditPage(Model model,
+                                HttpServletRequest request,
                                 @RequestParam("tourCode") String tourCode
                             ) {
-        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_BY_TOUR_CODE + tourCode, PriceResponseDTO.class);
+        PriceResponseDTO response = restTemplateUtils.getData(ApiPath.PRICE_GET_BY_TOUR_CODE + tourCode, request, PriceResponseDTO.class);
         PriceDTO priceDto = response.getData();
 
         BigDecimal allocationCost = service.calculateAllocationCost(priceDto);
@@ -149,14 +157,14 @@ public class PriceController {
     }
 
     @PostMapping(value = UrlPath.PRICE_EDIT, params = "action")
-    public String priceSubmitEdit(
-            @RequestParam(value="action", required = true) String action,
-            Model model,
-            @Valid @ModelAttribute("priceDto") PriceDTO priceDto,
-            BindingResult result
+    public String priceSubmitEdit(@RequestParam(value="action", required = true) String action,
+                                  Model model,
+                                  HttpServletRequest request,
+                                  @Valid @ModelAttribute("priceDto") PriceDTO priceDto,
+                                  BindingResult result
             ) {
 
-        // submit delete
+        // Cancel Edit
         if (action.equals("cancel")) {
             return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
         }
@@ -166,12 +174,11 @@ public class PriceController {
             return "price/priceEdit";
         }
 
-        // submit calculate
+        // Calculate Edit
         if(action.equals("calculate")) {
             BigDecimal allocationCost = service.calculateAllocationCost(priceDto);
             BigDecimal individualCost = service.calculateIndividualCost(priceDto);
             BigDecimal percentProfit = service.calculateProfitAdult(priceDto);
-
 
             model.addAttribute("allocationCost", allocationCost);
             model.addAttribute("individualCost", individualCost);
@@ -182,56 +189,20 @@ public class PriceController {
 
         // submit update price
         if (action.equals("update")) {
-            // Create HttpEntity with data = objectDto
-            HttpEntity<?> requestEntity = restTemplateUtils.setHeaderDefault(priceDto);
-
             // Send data to BE and receive response
-            PriceResponseDTO response = restTemplateUtils.putData(requestEntity, ApiPath.PRICE_UPDATE + priceDto.getTourCode(), PriceResponseDTO.class);
-            log.info("message: {}", response.getMessage());
+            PriceResponseDTO response = restTemplateUtils.putData(priceDto, ApiPath.PRICE_UPDATE + priceDto.getTourCode(), request, PriceResponseDTO.class);
         }
         return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
     }
 
 
-//    @GetMapping(value = UrlPath.PRICE_DELETE)
-//    public String deletePrice(
-//            @RequestParam("tourCode") String tourCode
-//    ) {
-//
-//            // Create HttpEntity with data = objectDto
-//            HttpEntity<?> requestEntity = restTemplateUtils.setHeaderDefault(tourCode);
-//
-//            // Delete price
-//            PriceResponseDTO responseDTO = restTemplateUtils.deleteData(requestEntity, ApiPath.PRICE_DELETE + tourCode, PriceResponseDTO.class);
-//            log.info("message: {}", responseDTO.getMessage());
-//
-//            return "redirect:" + ApiPath.PRICE_VIEW_ALL_PAGE;
-//    }
-
-//    @DeleteMapping(value = ApiPath.PRICE_EDIT_DELETE, params = "action")
-//    public String deletePrice(
-//            Model model,
-//            @RequestParam(value="action", required = true) String action,
-//            @RequestParam("tourCode") String tourCode,
-//            @ModelAttribute("priceDto") PriceDTO priceDto
-//        ) {
-//
-//        log.info("action: {}", action);
-//        log.info("tourCode: {}", tourCode);
-//        log.info("dto: {}", priceDto);
-//
-//
-//
-//        BigDecimal allocationCost = service.calculateAllocationCost(priceDto);
-//        BigDecimal individualCost = service.calculateIndividualCost(priceDto);
-//        BigDecimal percentProfit = service.calculateProfitAdult(priceDto);
-//
-//
-//        model.addAttribute("allocationCost", allocationCost);
-//        model.addAttribute("individualCost", individualCost);
-//        model.addAttribute("percentProfit", "Profit: " + percentProfit + "%");
-//        model.addAttribute("priceDto", priceDto);
-//
-//        return "price/priceEdit";
-//    }
+    @GetMapping(value = UrlPath.PRICE_DELETE)
+    public String deletePrice(
+            @RequestParam("tourCode") String tourCode,
+            HttpServletRequest request
+    ) {
+        PriceResponseDTO responseDTO = restTemplateUtils
+                .deleteData(tourCode, ApiPath.PRICE_DELETE + tourCode, request, PriceResponseDTO.class);
+        return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
+    }
 }
