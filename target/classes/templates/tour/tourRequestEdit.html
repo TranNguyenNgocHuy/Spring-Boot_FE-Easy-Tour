@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{tour/tourNav.html}"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Request Tour</title>
+</head>
+<body>
+<div layout:fragment="tour-content">
+    <div class="tour-view h-100 w-100 px-4 py-3">
+        <div class="tour-header-title w-100">
+            <h5>Edit Request Tour</h5>
+        </div>
+
+        <div class="row" >
+            <form th:action="@{${TOUR_EDIT_REQUEST_PAGE}}"  method="post" enctype="multipart/form-data" th:object="${tourRequestDTO}">
+                <div class="form-group row my-4 ">
+                    <label class="col-sm-2 col-form-label" for="uuid">UUID<span class="text-danger">*</span> </label>
+                    <div class="col-sm-10">
+                        <input th:value="${tourRequestDTO.uuid}" type="text" class="form-control" id="uuid" disabled>
+                    </div>
+                </div>
+                <div class="form-group row my-4">
+                    <label class="col-sm-2 col-form-label" for="description">Description </label>
+                    <div class="col-sm-10">
+                        <input th:field="${tourRequestDTO.description}" type="text" class="form-control" id="description" >
+                    </div>
+                </div>
+
+                <!--                <div class="row d-flex flex-row-reverse my-4 gap-4 pr-4">-->
+                <!--                    <div class="col-md-1">-->
+                <!--                        <a type="button"-->
+                <!--                           th:href="@{/admin/v1/tour/view-all-request}"-->
+                <!--                           class="btn btn-outline-secondary text-blue">Cancel</a>-->
+                <!--                    </div>-->
+                <!--                    <div class="col-md-1">-->
+                <!--                        <button type="submit" name="action" value="create" class="btn btn-primary">Update</button>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+
+                <div class="h-50 d-flex flex-row justify-content-end align-items-end gap-4">
+                    <button type="submit" name="action" value="create" class="btn btn-primary">Submit</button>
+                    <a type="button"
+                       th:href="@{/admin/v1/tour/view-all-request}"
+                       class="btn btn-outline-secondary">Cancel</a>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
