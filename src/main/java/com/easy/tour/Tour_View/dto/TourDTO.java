@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.UUID;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Getter
 @Setter
@@ -13,6 +15,7 @@ import lombok.*;
 @EqualsAndHashCode
 @Data
 public class TourDTO {
+
     // TourCode will be generated based on tourName
     String tourCode;
 
@@ -27,4 +30,10 @@ public class TourDTO {
 // private String approvedBy;
 // private Date approvalDate;
     private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_OP;
+
+    String tourRequestCode;
+
+    String tourImg1;
+
+    String tourImg2;
 }
