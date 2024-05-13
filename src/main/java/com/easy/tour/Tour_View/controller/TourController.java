@@ -3,6 +3,7 @@ package com.easy.tour.Tour_View.controller;
 import com.easy.tour.Tour_View.consts.ApiPath;
 import com.easy.tour.Tour_View.consts.UrlPath;
 import com.easy.tour.Tour_View.dto.TourDTO;
+import com.easy.tour.Tour_View.dto.TourRequestDTO;
 import com.easy.tour.Tour_View.response.TourResponseDTO;
 import com.easy.tour.Tour_View.service.TourService;
 import com.easy.tour.Tour_View.utils.RestTemplateUtils;
@@ -30,6 +31,7 @@ public class TourController {
     TourService tourService;
 
     String tourCodeInput = null;
+    String tourRequestCodeInput = null;
 
 
     //Showcase nav bar
@@ -65,8 +67,9 @@ public class TourController {
         }
 
         if (action.equals("generate")) {
-            String tourCode = tourService.generateTourCode(tourDto.getTourName());
+            String tourCode = tourService.generateTourCode(tourService.normalizeString(tourDto.getTourName()));
             tourCodeInput = tourCode;
+
             model.addAttribute("tourCode", tourCodeInput);
             model.addAttribute("tourDto", tourDto);
 
@@ -75,7 +78,6 @@ public class TourController {
         if (action.equals("create")) {
             // Set Tour Code
             tourDto.setTourCode(tourCodeInput);
-
             // Send data to BE and receive response
             TourResponseDTO response = restTemplateUtils.postData(tourDto, ApiPath.TOUR_CREATE, request, TourResponseDTO.class);
             log.info("message: {}", response.getMessage());

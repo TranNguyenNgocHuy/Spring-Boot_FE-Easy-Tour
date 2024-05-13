@@ -32,7 +32,7 @@
                         <td class="text-center" th:text="${userDto.firstName}"></td>
                         <td class="text-center" th:text="${userDto.lastName}"></td>
                         <td class="text-center" ></td>
-                        <td class="text-center" th:text="${userDto.gender}"></td>
+                        <td class="text-center" th:text="${userDto.gender ? 'Female' : 'Male'}"></td>
                         <td class="text-center" th:text="${userDto.email}"></td>
                         <td class="text-center" ></td>
                         <td class="text-center" ></td>

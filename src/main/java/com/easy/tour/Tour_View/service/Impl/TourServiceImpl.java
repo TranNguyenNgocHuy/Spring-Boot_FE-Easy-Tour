@@ -6,13 +6,16 @@ import com.easy.tour.Tour_View.utils.TourCodeGeneratorUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @Slf4j
 public class TourServiceImpl implements TourService {
     TourCodeGeneratorUtils tourCodeGeneratorUtils = new TourCodeGeneratorUtils();
+
     @Override
     public String generateTourCode(String tourName) {
         String tourCode = null;
@@ -25,10 +28,15 @@ public class TourServiceImpl implements TourService {
         return tourCode;
     }
 
-//Create for testing
+    //Create for testing
 // public static void main(String[] args) {
 // TourServiceImpl tourService = new TourServiceImpl();
 // System.out.println(tourService.generateTourCode("Ha Noi 3 ngay 2 dem"));
 // }
-
+    @Override
+    public String normalizeString(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
+    }
 }

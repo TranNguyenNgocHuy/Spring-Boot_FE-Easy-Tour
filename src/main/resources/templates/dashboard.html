@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layout.html}">
 <head>
     <meta charset="UTF-8">
@@ -11,6 +12,7 @@
     <div class="dashboard-page w-100 h-100 p-2">
       Admin Dashboard
     </div>
+      <input type="hidden" id="userInfo" th:value="${userDTOJson}">
   </div>
 </body>
 </html>

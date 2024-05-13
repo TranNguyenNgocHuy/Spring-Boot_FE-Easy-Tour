@@ -21,7 +21,7 @@ public class PriceDTO extends BaseObject {
 
     private Long priceId;
 
-    @NotEmpty(message = "You must enter Tour Code field.")
+    @NotEmpty(message = "You must choose Tour Code.")
     private String tourCode;
 
     private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_OP;

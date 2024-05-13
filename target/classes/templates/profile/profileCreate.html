@@ -83,10 +83,6 @@
                                    placeholder="Phone Number"
                                    th:field="${userDTO.phoneNumber}"
                             >
-<!--                            <p th:if="${#fields.hasErrors('firstName')}"-->
-<!--                               th:errorclass="text-danger"-->
-<!--                               th:errors="${userDto.firstName}"-->
-<!--                            ></p>-->
                         </div>
                     </div>
 
@@ -130,6 +126,10 @@
                                 </li>
                             </ul>
                         </div>
+                        <p th:if="${#fields.hasErrors('roles')}"
+                           th:errorclass="text-danger"
+                           th:errors="${userDTO.roles}"
+                        ></p>
                     </div>
                 </div>
 

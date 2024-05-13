@@ -9,60 +9,74 @@
     <title>Create Tour</title>
 </head>
 <body>
-    <div layout:fragment="tour-content">
-        <div class="tour-view h-100 w-100 px-4 py-3">
-            <div class="tour-header-title w-100">
-                <h5>Create Tour</h5>
-            </div>
+<div layout:fragment="tour-content">
+    <div class="tour-view h-100 w-100 px-4 py-3">
+        <div class="tour-header-title w-100">
+            <h5>Create Tour</h5>
+        </div>
 
-            <form th:action="@{${TOUR_CREATE_REQUEST_PAGE}}" method="post" th:object="${tourDto}">
-                <div style="display: flex; align-items: flex-start;">
-                    <div style="flex: 35%; margin-right: 20px;">
-                        <div style="margin-bottom: 20px; margin-top: 5px"><label for="tourCode">Tour Code:</label>
-                            <p style="display: inline; color: blue; margin-left: 5px;" th:text="${tourCode}"
-                               th:value="${tourDto.tourCode}" id="tourCode"></p></div>
-                        <div style="margin-bottom: 20px;">
-                            <label for="tourName">Tour Name:</label>
-                            <input type="text" th:field="${tourDto.tourName}" id="tourName"
-                                   style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
-                        </div>
-
-                        <div style="margin-bottom: 20px;">
-                            <label for="maximumSize">Maximum Size:</label>
-                            <select th:field="${tourDto.maximumSize}" id="maximumSize"
-                                    style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
-                                <option th:each="size : ${#numbers.sequence(1, 100)}" th:value="${size}"
-                                        th:text="${size}"></option>
-                            </select>
-                        </div>
-
-                        <div style="margin-top: 20px;">
-                            <button type="submit" name="action" value="cancel"
-                                    style="padding: 10px 20px; margin-right: 10px; background-color: #eee; border: none; border-radius: 3px;">
-                                Cancel
-                            </button>
-                            <button type="submit" name="action" value="create"
-                                    style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 3px;">
-                                Submit
-                            </button>
-                            <button type="submit" name="action" value="generate"
-                                    style="padding: 10px 20px; background-color: #ffc107; color: #000; border: none; border-radius: 3px;">
-                                Tour Code
-                            </button>
-                        </div>
+        <form th:action="@{${TOUR_CREATE_REQUEST_PAGE}}" method="post" th:object="${tourDto}">
+            <div style="display: flex; align-items: flex-start;">
+                <div style="flex: 35%; margin-right: 20px;">
+                    <div style="margin-bottom: 20px; margin-top: 5px"><label for="tourCode">Tour Code:</label>
+                        <p style="display: inline; color: blue; margin-left: 5px;" th:text="${tourCode}"
+                           th:value="${tourDto.tourCode}" id="tourCode"></p></div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="tourName">Tour Name:</label>
+                        <input type="text" th:field="${tourDto.tourName}" id="tourName"
+                               style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
                     </div>
 
-                    <div style="flex: 65%;">
-                        <div style="margin-bottom: 20px;">
-                            <label for="description">Description:</label>
-                            <textarea th:field="${tourDto.description}" rows="6" id="description"
-                                      style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc; resize: vertical;"></textarea>
-                        </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="maximumSize">Maximum Size:</label>
+                        <select th:field="${tourDto.maximumSize}" id="maximumSize"
+                                style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
+                            <option th:each="size : ${#numbers.sequence(1, 100)}" th:value="${size}"
+                                    th:text="${size}"></option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="tourRequestCode">Tour Detail Id:</label>
+                        <input type="text" th:field="${tourDto.tourRequestCode}" id="tourRequestCode"
+                               style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="urlImg1">Image URL:</label>
+                        <input type="text" th:field="${tourDto.tourImg1}" id="urlImg1"
+                               style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="urlImg2">Image URL:</label>
+                        <input type="text" th:field="${tourDto.tourImg2}" id="urlImg2"
+                               style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button type="submit" name="action" value="cancel"
+                                style="padding: 10px 20px; margin-right: 10px; background-color: #eee; border: none; border-radius: 3px;">
+                            Cancel
+                        </button>
+                        <button type="submit" name="action" value="create"
+                                style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 3px;">
+                            Submit
+                        </button>
+                        <button type="submit" name="action" value="generate"
+                                style="padding: 10px 20px; background-color: #ffc107; color: #000; border: none; border-radius: 3px;">
+                            Tour Code
+                        </button>
                     </div>
                 </div>
-            </form>
-        </div>
+
+                <div style="flex: 65%;">
+                    <div style="margin-bottom: 20px;">
+                        <label for="description">Description:</label>
+                        <textarea th:field="${tourDto.description}" rows="6" id="description"
+                                  style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc; resize: vertical;"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
 </body>
 </html>

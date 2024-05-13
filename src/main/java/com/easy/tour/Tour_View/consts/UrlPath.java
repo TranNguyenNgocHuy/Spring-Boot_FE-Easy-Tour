@@ -4,8 +4,6 @@ public interface UrlPath {
     String BASE_URL = "/admin/v1";
     //http://localhost:8081/admin/v1
 
-    //Ping
-    String PING = BASE_URL + "/ping";
 
     // LOGIN //
     String LOGIN_PAGE = BASE_URL + "/login";
@@ -23,6 +21,8 @@ public interface UrlPath {
     String PROFILE_CREATE_PAGE = BASE_URL + "/profile/create";
 
     String PROFILE_VIEW_ALL_PAGE = BASE_URL + "/profile/view-all-profile";
+
+    String PROFILE_EDIT_BY_USER = BASE_URL + "/profile/edit";
 
 
     // TOUR //
