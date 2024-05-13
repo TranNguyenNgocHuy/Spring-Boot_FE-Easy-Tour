@@ -1,12 +1,15 @@
-<div class="d-flex justify-content-end align-items-center gap-3" xmlns:th="http://www.thymeleaf.org">
+<div class="h-100 d-flex justify-content-end align-items-center gap-3 " xmlns:th="http://www.thymeleaf.org">
 
     <i class="header-notification fas fa-bell"></i>
-    <div class="header-user d-flex justify-content-center align-items-center">
-        <i class="header-user-icon far fa-user"></i>
-    </div>
 
-    <div class="h-100">
-        <p class="header-user-name m-0" th:text="${email}">Trần Huy</p>
-        <p>Id: 123</p>
+    <div class="d-flex justify-content-center align-items-center gap-1">
+
+        <div class="header-user d-flex justify-content-center align-items-center ">
+            <i class="header-user-icon far fa-user"></i>
+        </div>
+        <a th:href="@{/admin/v1/profile/edit}">
+            <p class="header-user-name m-0" ></p>
+        </a>
+
     </div>
 </div>

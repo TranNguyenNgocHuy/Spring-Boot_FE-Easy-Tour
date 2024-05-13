@@ -4,10 +4,12 @@ import com.easy.tour.Tour_View.consts.ApiPath;
 import com.easy.tour.Tour_View.consts.UrlPath;
 import com.easy.tour.Tour_View.dto.PriceDTO;
 import com.easy.tour.Tour_View.response.PriceResponseDTO;
+import com.easy.tour.Tour_View.response.ResponseDTO;
 import com.easy.tour.Tour_View.service.PriceService;
 import com.easy.tour.Tour_View.utils.ParserDateTimeUtils;
 import com.easy.tour.Tour_View.utils.RestTemplateUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -38,10 +41,17 @@ public class PriceController {
         return "price/priceNav";
     }
     @GetMapping(value = UrlPath.PRICE_CREATE_PAGE)
-    public String priceCreatePage(Model model) {
+    public String priceCreatePage(Model model,
+                                  HttpServletRequest request,
+                                  HttpSession session
+    ) {
         PriceDTO priceDTO = new PriceDTO();
+        ResponseDTO<String> response = restTemplateUtils.getData(ApiPath.TOUR_NON_PRICE_GET_ALL, request, ResponseDTO.class);
+        session.setAttribute("tourCodeList", response.getList());
+
         model.addAttribute("activeNav", "price");
         model.addAttribute("activeTab", "priceCreate");
+        model.addAttribute("tourCodeList", response.getList());
         model.addAttribute("priceDto", priceDTO);
         return "price/priceCreate";
     }
@@ -62,7 +72,6 @@ public class PriceController {
         model.addAttribute("activeNav", "price");
         model.addAttribute("activeTab", "priceView");
         model.addAttribute("priceDtoList", response.getList());
-        System.out.println(response.getList());
         return "price/priceViewAll";
     }
 
@@ -79,6 +88,7 @@ public class PriceController {
     public String priceCreateSubmit(@RequestParam(value="action", required = true) String action,
                                     Model model,
                                     HttpServletRequest request,
+                                    HttpSession session,
                                     @Valid @ModelAttribute("priceDto") PriceDTO priceDto,
                                     BindingResult result
     ) {
@@ -88,6 +98,8 @@ public class PriceController {
         }
 
         if (result.hasErrors()) {
+            List<String> tourCodeList = (List<String>) session.getAttribute("tourCodeList");
+            model.addAttribute("tourCodeList", tourCodeList);
             return "price/priceCreate";
         }
 
@@ -100,6 +112,9 @@ public class PriceController {
                 showProfit = true;
             }
 
+            List<String> tourCodeList = (List<String>) session.getAttribute("tourCodeList");
+
+            model.addAttribute("tourCodeList", tourCodeList);
             model.addAttribute("allocationCost", allocationCost);
             model.addAttribute("individualCost", individualCost);
             model.addAttribute("showProfit", showProfit);

@@ -49,21 +49,18 @@ public class ProfileUserController {
                                       HttpServletRequest request,
                                       @Valid @ModelAttribute("userDTO") UserDTO userDTO,
                                       BindingResult result) {
-        // Cancel Edit
+        // Cancel
         if (action.equals("cancel")) {
             return "redirect:" + UrlPath.PROFILE_VIEW_ALL_PAGE;
         }
         // Binding result
         if (result.hasErrors()) {
-            System.out.println(result);
             return "profile/profileCreate";
         }
 
         if (action.equals("create")) {
             // Send data to BE and receive response
-            System.out.println(userDTO);
             UserResponseDTO response = restTemplateUtils.postData(userDTO, ApiPath.USER_CREATE, request, UserResponseDTO.class);
-            System.out.println(response);
         }
         return "redirect:" + UrlPath.PROFILE_VIEW_ALL_PAGE;
     }
@@ -79,5 +76,13 @@ public class ProfileUserController {
         // Data
         model.addAttribute("userDtoList", response.getList());
         return "profile/profileViewAll";
+    }
+
+    @GetMapping(value = UrlPath.PROFILE_EDIT_BY_USER)
+    public String profileEditPage(Model model,
+                                  HttpServletRequest request
+    ) {
+
+        return "profile/profileEditByUser";
     }
 }

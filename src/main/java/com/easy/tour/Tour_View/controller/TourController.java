@@ -67,7 +67,7 @@ public class TourController {
         }
 
         if (action.equals("generate")) {
-            String tourCode = tourService.generateTourCode(tourDto.getTourName());
+            String tourCode = tourService.generateTourCode(tourService.normalizeString(tourDto.getTourName()));
             tourCodeInput = tourCode;
 
             model.addAttribute("tourCode", tourCodeInput);

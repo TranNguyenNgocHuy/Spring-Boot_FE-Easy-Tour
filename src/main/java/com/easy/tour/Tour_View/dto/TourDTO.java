@@ -29,7 +29,7 @@ public class TourDTO {
 // private Date createDate;
 // private String approvedBy;
 // private Date approvalDate;
-    private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_OP;
+    private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_FC;
 
     String tourRequestCode;
 

@@ -21,14 +21,16 @@
                   class="price-form w-100 d-flex flex-column py-3 px-4">
 
                 <div class="create-price-header row d-flex flex-column justify-content-between px-4">
+
                     <div class="price-item w-100">
                         <label>Tour Code</label>
                         <div class="h-100">
-                            <input class="price-input"
-                                   type="text"
-                                   placeholder="Enter Tour Code"
-                                   th:field="${priceDto.tourCode}"
-                            >
+                            <select class="price-input" th:field="${priceDto.tourCode}">
+                                <option selected value="">Choose Tour Code</option>
+                                <option th:each="tourCode : ${tourCodeList}"
+                                        th:value="${tourCode}"
+                                        th:text="${tourCode}"></option>
+                            </select>
                             <p th:if="${#fields.hasErrors('tourCode')}"
                                th:errorclass="text-danger"
                                th:errors="${priceDto.tourCode}"

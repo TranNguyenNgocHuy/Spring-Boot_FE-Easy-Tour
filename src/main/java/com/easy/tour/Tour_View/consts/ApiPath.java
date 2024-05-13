@@ -8,11 +8,11 @@ public interface ApiPath {
 
     //Login
     String LOGIN = API + "/login";
-
+    String FORGOT_PASSWORD = API + "/forgot-password";
     //User
     String USER_GET_ALL = API + "/user/get-all";
     String USER_CREATE = API + "/user/create";
-    String USER_GET_UUID = API + "/user/get-by-uuid";
+    String USER_GET_UUID = API + "/user/";
     String USER_REGISTER = API + "/user/register";
     String USER_UPDATE = API + "/user/update";
     String USER_DELETE = API + "/user/delete";
@@ -31,6 +31,7 @@ public interface ApiPath {
     String TOUR_CREATE = API + "/tour/create-tour";
     String TOUR_UPDATE = API + "/tour/update/";
     String TOUR_DELETE = API + "/tour/delete/";
+    String TOUR_NON_PRICE_GET_ALL = API + "/tour/get-all-tour-no-price";
 
     //Price
     String PRICE_GET_All = API + "/price/get-all";

@@ -65,4 +65,5 @@ public class TourCodeGeneratorUtils {
         }
         return tourCode.toString() + firstThreeDigits;
     }
+
 }

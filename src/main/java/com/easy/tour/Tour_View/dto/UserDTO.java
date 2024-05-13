@@ -1,7 +1,7 @@
 package com.easy.tour.Tour_View.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,6 +14,8 @@ import java.util.Set;
 @EqualsAndHashCode
 @Data
 public class UserDTO extends BaseObject {
+
+    private String uuid;
 
     @NotEmpty(message = "You must enter Last Name field.")
     private String lastName;
@@ -30,6 +32,7 @@ public class UserDTO extends BaseObject {
 
     private Integer phoneNumber;
 
+    @Size(min = 1, message = "Roles must not be empty")
     private Set<String> roles;
 
     private Date createdDate;
