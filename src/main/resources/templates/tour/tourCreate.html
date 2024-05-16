@@ -17,14 +17,19 @@
 
         <form th:action="@{${TOUR_CREATE_REQUEST_PAGE}}" method="post" th:object="${tourDto}">
             <div style="display: flex; align-items: flex-start;">
+
                 <div style="flex: 35%; margin-right: 20px;">
-                    <div style="margin-bottom: 20px; margin-top: 5px"><label for="tourCode">Tour Code:</label>
-                        <p style="display: inline; color: blue; margin-left: 5px;" th:text="${tourCode}"
-                           th:value="${tourDto.tourCode}" id="tourCode"></p></div>
+                    <div style="margin-bottom: 20px; margin-top: 5px">
+                        <label for="tourCode">Tour Code:</label>
+                        <input id="tourCode" type="text"
+                               style="display: inline; color: blue; margin-left: 5px; border: none;"
+                               th:field="${tourDto.tourCode}" readonly>
+                    </div>
                     <div style="margin-bottom: 20px;">
                         <label for="tourName">Tour Name:</label>
                         <input type="text" th:field="${tourDto.tourName}" id="tourName"
-                               style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;">
+                               style="width: 100%; padding: 5px; border-radius: 3px; border: 1px solid #ccc;"
+                               onkeyup="generateTourCode()">
                     </div>
 
                     <div style="margin-bottom: 20px;">
@@ -59,10 +64,6 @@
                                 style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 3px;">
                             Submit
                         </button>
-                        <button type="submit" name="action" value="generate"
-                                style="padding: 10px 20px; background-color: #ffc107; color: #000; border: none; border-radius: 3px;">
-                            Tour Code
-                        </button>
                     </div>
                 </div>
 
@@ -75,8 +76,41 @@
                 </div>
             </div>
         </form>
+        <script>
+            // List of destinations and their respective abbreviations
+            const destinations = {
+                "Ha Noi": "HN",
+                "Vung Tau": "VT",
+                "Nha Trang": "NT",
+                "Da Nang": "DN",
+                "Son La": "SL",
+
+            };
+
+            // Function to generate a random 3-digit code
+            function generateRandomCode() {
+                return Math.floor(100 + Math.random() * 900);
+            }
+
+            // Function to generate the tour code
+            function generateTourCode() {
+                const tourName = document.getElementById("tourName").value.trim();
+
+                // Check if the tour name includes any of the destinations
+                for (const destination in destinations) {
+                    if (tourName.toLowerCase().includes(destination.toLowerCase())) {
+                        const abbreviation = destinations[destination];
+                        const randomCode = generateRandomCode();
+                        document.getElementById("tourCode").value = `${abbreviation}${randomCode}`;
+                        return;
+                    }
+                }
+
+                // If no destination is found, clear the tour code
+                document.getElementById("tourCode").value = "";
+            }
+        </script>
     </div>
 </div>
-
 </body>
 </html>

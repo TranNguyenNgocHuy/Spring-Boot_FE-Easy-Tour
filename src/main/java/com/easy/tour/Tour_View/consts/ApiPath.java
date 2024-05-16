@@ -40,4 +40,9 @@ public interface ApiPath {
     String PRICE_UPDATE = API + "/price/update/";
     String PRICE_DELETE = API + "/price/delete/";
     // end
+
+    //DepartureDate
+    String DEPARTURE_DATE_CREATE = API + "/tour/create-date";
+    String TOUR_ONLY_GET_ALL = API +"/tour/get-all-tour-code";
+
 }

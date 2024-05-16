@@ -62,4 +62,9 @@ public interface UrlPath {
     String PRICE_EDIT = BASE_URL + "/price/edit";
 
     String PRICE_DELETE = BASE_URL + "/price/delete";
+
+    //DepartureDate
+    String DEPARTURE_DATE_CREATE_PAGE = BASE_URL + "/tour/create-date";
+
+
 }
