@@ -2,12 +2,18 @@ package com.easy.tour.Tour_View.controller;
 
 import com.easy.tour.Tour_View.consts.ApiPath;
 import com.easy.tour.Tour_View.consts.UrlPath;
+import com.easy.tour.Tour_View.dto.DepartureDateDTO;
+import com.easy.tour.Tour_View.dto.PriceDTO;
 import com.easy.tour.Tour_View.dto.TourDTO;
 import com.easy.tour.Tour_View.dto.TourRequestDTO;
+import com.easy.tour.Tour_View.response.DepartureDateResponseDTO;
+import com.easy.tour.Tour_View.response.PriceResponseDTO;
+import com.easy.tour.Tour_View.response.ResponseDTO;
 import com.easy.tour.Tour_View.response.TourResponseDTO;
 import com.easy.tour.Tour_View.service.TourService;
 import com.easy.tour.Tour_View.utils.RestTemplateUtils;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +25,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Controller
 @Slf4j
@@ -49,6 +58,7 @@ public class TourController {
         model.addAttribute("tourDto", tourDto);
         return "tour/tourCreate";
     }
+
     @PostMapping(value = UrlPath.TOUR_CREATE_PAGE, params = "action")
     public String tourCreate(Model model,
                              HttpServletRequest request,
@@ -66,19 +76,8 @@ public class TourController {
             return "tour/tourCreate";
         }
 
-        if (action.equals("generate")) {
-            String tourCode = tourService.generateTourCode(tourService.normalizeString(tourDto.getTourName()));
-            tourCodeInput = tourCode;
-
-            model.addAttribute("tourCode", tourCodeInput);
-            model.addAttribute("tourDto", tourDto);
-
-            return "tour/tourCreate";
-        }
         if (action.equals("create")) {
-            // Set Tour Code
-            tourDto.setTourCode(tourCodeInput);
-            // Send data to BE and receive response
+
             TourResponseDTO response = restTemplateUtils.postData(tourDto, ApiPath.TOUR_CREATE, request, TourResponseDTO.class);
             log.info("message: {}", response.getMessage());
         }
@@ -89,7 +88,7 @@ public class TourController {
     public String tourView(Model model,
                            HttpServletRequest request
     ) {
-        TourResponseDTO response = restTemplateUtils.getData(ApiPath.TOUR_GET_All, request ,TourResponseDTO.class);
+        TourResponseDTO response = restTemplateUtils.getData(ApiPath.TOUR_GET_All, request, TourResponseDTO.class);
         model.addAttribute("activeNav", "tour");
         model.addAttribute("activeTab", "viewTour");
         model.addAttribute("tourDtoList", response.getList());
@@ -130,7 +129,7 @@ public class TourController {
 
     @PostMapping(value = UrlPath.TOUR_EDIT, params = "action")
     public String tourSubmitEdit(
-            @RequestParam(value="action", required = true) String action,
+            @RequestParam(value = "action", required = true) String action,
             Model model,
             HttpServletRequest request,
             @Valid @ModelAttribute("tourDto") TourDTO tourDto,
@@ -156,4 +155,47 @@ public class TourController {
         }
         return "redirect:" + UrlPath.TOUR_VIEW_ALL_PAGE;
     }
+
+    @GetMapping(value = UrlPath.DEPARTURE_DATE_CREATE_PAGE)
+    public String departureDateView(Model model,
+                                    HttpServletRequest request,
+                                    HttpSession session
+    ) {
+        DepartureDateDTO departureDateDto = new DepartureDateDTO();
+        ResponseDTO<String> response = restTemplateUtils.getData(ApiPath.TOUR_ONLY_GET_ALL, request, ResponseDTO.class);
+        session.setAttribute("tourCodeList", response.getList());
+
+        model.addAttribute("activeNav", "tour");
+        model.addAttribute("activeTab", "departureDate");
+        model.addAttribute("tourCodeList", response.getList());
+        model.addAttribute("departureDateDto", departureDateDto);
+        return "departuredate/departureDateCreate";
+    }
+
+    @PostMapping(value = UrlPath.DEPARTURE_DATE_CREATE_PAGE, params = "action")
+    public String departureDateCreateSubmit(@RequestParam(value="action", required = true) String action,
+                                    Model model,
+                                    HttpServletRequest request,
+                                    HttpSession session,
+                                    @Valid @ModelAttribute("departureDateDto") DepartureDateDTO departureDateDto,
+                                    BindingResult result
+    ) {
+        if (action.equals("cancel")) {
+            return "redirect:" + UrlPath.TOUR_VIEW_ALL_PAGE;
+        }
+
+        if (result.hasErrors()) {
+            List<String> tourCodeList = (List<String>) session.getAttribute("tourCodeList");
+            model.addAttribute("tourCodeList", tourCodeList);
+            return "departuredate/departureDateCreate";
+        }
+
+        // submit create price
+        if (action.equals("create")) {
+            DepartureDateResponseDTO response = restTemplateUtils.postData(departureDateDto, ApiPath.DEPARTURE_DATE_CREATE, request, DepartureDateResponseDTO.class);
+            log.info("message: {}", response.getMessage());
+        }
+        return "redirect:" + UrlPath.DEPARTURE_DATE_CREATE_PAGE;
+    }
+
 }

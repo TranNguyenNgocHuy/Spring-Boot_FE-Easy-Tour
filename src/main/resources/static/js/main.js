@@ -47,5 +47,6 @@ function insertUseInfo() {
     } else {
               console.error("User info not found in localStorage.");
     }
+
 }
 
