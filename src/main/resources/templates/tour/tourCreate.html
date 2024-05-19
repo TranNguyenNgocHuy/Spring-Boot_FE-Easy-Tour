@@ -78,14 +78,24 @@
         </form>
         <script>
             // List of destinations and their respective abbreviations
+            // List of destinations and their respective abbreviations
             const destinations = {
                 "Ha Noi": "HN",
                 "Vung Tau": "VT",
                 "Nha Trang": "NT",
                 "Da Nang": "DN",
                 "Son La": "SL",
-
             };
+
+            // Function to normalize the input string
+            function normalizeString(str) {
+                // Use the Normalize.normalize() function to convert the string to NFC form
+                let nfdNormalizedString = str.normalize("NFD");
+
+                // Use a regular expression to remove any combining diacritical marks
+                const pattern = /[\u0300-\u036f]/g;
+                return nfdNormalizedString.replace(pattern, "");
+            }
 
             // Function to generate a random 3-digit code
             function generateRandomCode() {
@@ -95,10 +105,11 @@
             // Function to generate the tour code
             function generateTourCode() {
                 const tourName = document.getElementById("tourName").value.trim();
+                const normalizedTourName = normalizeString(tourName);
 
-                // Check if the tour name includes any of the destinations
+                // Check if the normalized tour name includes any of the destinations
                 for (const destination in destinations) {
-                    if (tourName.toLowerCase().includes(destination.toLowerCase())) {
+                    if (normalizedTourName.toLowerCase().includes(destination.toLowerCase())) {
                         const abbreviation = destinations[destination];
                         const randomCode = generateRandomCode();
                         document.getElementById("tourCode").value = `${abbreviation}${randomCode}`;

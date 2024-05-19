@@ -14,7 +14,7 @@
 </head>
 <body>
 <div layout:fragment="tour-content">
-    <div class="container my-5">
+    <div class="tour-view h-100 w-100 px-4 py-3">
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title">Create Departure Date</h5>
@@ -51,6 +51,42 @@
                         <button type="submit" name="action" value="cancel" class="btn btn-secondary">Cancel</button>
                     </div>
                 </form>
+                <table class="table table-striped table-hover table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Tour Code</th>
+                        <th class="text-center" scope="col">Departure Date</th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="departureDateDTO : ${departureDateDTOList}">
+                    <tr>
+                        <td class="text-center" th:text="${departureDateDTO.tourCode}"></td>
+                        <td class="text-center" th:text="${departureDateDTO.departureDate}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example" th:if="${totalPages != null}">
+                    <ul class="pagination">
+                        <li th:class="${pageNumber == 1 ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link"
+                               th:href="${'/admin/v1/tour/create-date?pageNumber=' + (pageNumber - 1) + '&pageSize=' + pageSize}"
+                               th:text="'Previous'"></a>
+                        </li>
+
+                        <li th:class="${pageNum == pageNumber ? 'page-item active' : 'page-item'}" th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+                            <a class="page-link"
+                               th:href="${'/admin/v1/tour/create-date?pageNumber=' + pageNum + '&pageSize=' + pageSize}"
+                               th:text="${pageNum}"
+                            >Page</a>
+                        </li>
+
+                        <li th:class="${pageNumber == totalPages ? 'page-item disabled' : 'page-item'}">
+                            <a class="page-link"
+                               th:href="${'/admin/v1/tour/create-date?pageNumber=' + (pageNumber + 1) + '&pageSize=' + pageSize}"
+                               th:text="'Next'"></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>

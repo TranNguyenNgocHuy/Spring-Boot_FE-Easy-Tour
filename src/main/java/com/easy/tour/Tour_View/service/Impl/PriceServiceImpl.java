@@ -1,13 +1,18 @@
 package com.easy.tour.Tour_View.service.Impl;
 
 import com.easy.tour.Tour_View.dto.PriceDTO;
+import com.easy.tour.Tour_View.dto.TourDTO;
 import com.easy.tour.Tour_View.service.PriceService;
 import lombok.extern.log4j.Log4j;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -48,4 +53,6 @@ public class PriceServiceImpl implements PriceService {
                 .add(priceDTO.getOtherPrice()).add(priceDTO.getVisaFee());
         return personalFee;
     }
+
+
 }
