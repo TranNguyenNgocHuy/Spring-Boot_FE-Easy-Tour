@@ -10,6 +10,8 @@ import com.easy.tour.Tour_View.response.DepartureDateResponseDTO;
 import com.easy.tour.Tour_View.response.PriceResponseDTO;
 import com.easy.tour.Tour_View.response.ResponseDTO;
 import com.easy.tour.Tour_View.response.TourResponseDTO;
+import com.easy.tour.Tour_View.service.DepartureDateService;
+import com.easy.tour.Tour_View.service.Impl.DepartureDateServiceImpl;
 import com.easy.tour.Tour_View.service.TourService;
 import com.easy.tour.Tour_View.utils.RestTemplateUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +19,10 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +44,9 @@ public class TourController {
 
     @Autowired
     TourService tourService;
+
+    @Autowired
+    DepartureDateService departureDateService;
 
     String tourCodeInput = null;
     String tourRequestCodeInput = null;
@@ -86,14 +95,25 @@ public class TourController {
 
     @GetMapping(value = UrlPath.TOUR_VIEW_ALL_PAGE)
     public String tourView(Model model,
-                           HttpServletRequest request
-    ) {
+                           HttpServletRequest request,
+                           @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
+                           @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
         TourResponseDTO response = restTemplateUtils.getData(ApiPath.TOUR_GET_All, request, TourResponseDTO.class);
+        List<TourDTO> tourDTOList = response.getList();
+
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+        Page<TourDTO> tourPage = tourService.convertTourListToPage(tourDTOList, pageable);
+
         model.addAttribute("activeNav", "tour");
         model.addAttribute("activeTab", "viewTour");
-        model.addAttribute("tourDtoList", response.getList());
+        model.addAttribute("tourDtoList", tourPage.getContent());
+        model.addAttribute("totalPages", tourPage.getTotalPages());
+        model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("pageSize", pageSize);
+
         return "tour/tourView";
     }
+
 
     @GetMapping(value = UrlPath.TOUR_APPROVE_PAGE)
     public String tourApprove(Model model) {
@@ -156,29 +176,13 @@ public class TourController {
         return "redirect:" + UrlPath.TOUR_VIEW_ALL_PAGE;
     }
 
-    @GetMapping(value = UrlPath.DEPARTURE_DATE_CREATE_PAGE)
-    public String departureDateView(Model model,
-                                    HttpServletRequest request,
-                                    HttpSession session
-    ) {
-        DepartureDateDTO departureDateDto = new DepartureDateDTO();
-        ResponseDTO<String> response = restTemplateUtils.getData(ApiPath.TOUR_ONLY_GET_ALL, request, ResponseDTO.class);
-        session.setAttribute("tourCodeList", response.getList());
-
-        model.addAttribute("activeNav", "tour");
-        model.addAttribute("activeTab", "departureDate");
-        model.addAttribute("tourCodeList", response.getList());
-        model.addAttribute("departureDateDto", departureDateDto);
-        return "departuredate/departureDateCreate";
-    }
-
     @PostMapping(value = UrlPath.DEPARTURE_DATE_CREATE_PAGE, params = "action")
-    public String departureDateCreateSubmit(@RequestParam(value="action", required = true) String action,
-                                    Model model,
-                                    HttpServletRequest request,
-                                    HttpSession session,
-                                    @Valid @ModelAttribute("departureDateDto") DepartureDateDTO departureDateDto,
-                                    BindingResult result
+    public String departureDateCreateSubmit(@RequestParam(value = "action", required = true) String action,
+                                            Model model,
+                                            HttpServletRequest request,
+                                            HttpSession session,
+                                            @Valid @ModelAttribute("departureDateDto") DepartureDateDTO departureDateDto,
+                                            BindingResult result
     ) {
         if (action.equals("cancel")) {
             return "redirect:" + UrlPath.TOUR_VIEW_ALL_PAGE;
@@ -196,6 +200,34 @@ public class TourController {
             log.info("message: {}", response.getMessage());
         }
         return "redirect:" + UrlPath.DEPARTURE_DATE_CREATE_PAGE;
+    }
+
+    @GetMapping(value = UrlPath.DEPARTURE_DATE_CREATE_PAGE)
+    public String showForm(Model model,
+                           HttpServletRequest request,
+                           HttpSession session,
+                           @RequestParam(required = false, defaultValue = "1") Integer pageNumber,
+                           @RequestParam(required = false, defaultValue = "5") Integer pageSize) {
+
+        DepartureDateDTO departureDateDto = new DepartureDateDTO();
+        ResponseDTO<String> response = restTemplateUtils.getData(ApiPath.TOUR_ONLY_GET_ALL, request, ResponseDTO.class);
+        session.setAttribute("tourCodeList", response.getList());
+        Pageable pageable = PageRequest.of(pageNumber - 1, pageSize);
+
+        DepartureDateResponseDTO departureResponse = restTemplateUtils.getData(ApiPath.DEPARTURE_DATE_GET_ALL, request, DepartureDateResponseDTO.class);
+        List<DepartureDateDTO> departureDateDTOList = departureResponse.getList();
+
+        Page<DepartureDateDTO> tourPage = departureDateService.convertTourListToPage(departureDateDTOList, pageable);
+
+        model.addAttribute("activeNav", "tour");
+        model.addAttribute("activeTab", "departureDate");
+        model.addAttribute("departureDateDTOList", tourPage.getContent());
+        model.addAttribute("totalPages", tourPage.getTotalPages());
+        model.addAttribute("pageNumber", pageNumber);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("tourCodeList", response.getList());
+        model.addAttribute("departureDateDto", departureDateDto);
+        return "departuredate/departureDateCreate";
     }
 
 }
