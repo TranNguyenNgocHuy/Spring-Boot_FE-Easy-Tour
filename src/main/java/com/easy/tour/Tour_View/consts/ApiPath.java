@@ -14,7 +14,8 @@ public interface ApiPath {
     String USER_CREATE = API + "/user/create";
     String USER_GET_UUID = API + "/user/";
     String USER_REGISTER = API + "/user/register";
-    String USER_UPDATE = API + "/user/update";
+    String USER_UPDATE_INFO = API + "/user/update";
+    String USER_CHANGE_PASSWORD = API + "/user/change-password";
     String USER_DELETE = API + "/user/delete";
 
 

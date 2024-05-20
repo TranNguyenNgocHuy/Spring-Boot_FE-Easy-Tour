@@ -21,3 +21,6 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     mode: HTML
+  servlet:
+    multipart:
+      max-request-size: 5MB

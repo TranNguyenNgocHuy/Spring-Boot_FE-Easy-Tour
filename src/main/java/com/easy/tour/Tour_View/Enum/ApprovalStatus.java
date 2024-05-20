@@ -1,9 +1,8 @@
 package com.easy.tour.Tour_View.Enum;
 
 public enum ApprovalStatus {
-    PENDING_OP,
-    PENDING_FC,
-    REJECTED_OP,
-    REJECTED_FC,
+    PENDING_MANAGER,
+    PENDING_PRICE,
+    REJECTED,
     APPROVED
 }

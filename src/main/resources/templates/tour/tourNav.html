@@ -31,10 +31,14 @@
 
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
                th:classappend="${activeTab == 'approveTour'} ? 'active'"
-               th:href="@{/admin/v1/tour/approve}">Approve Tour <i class="fas fa-chevron-right"></i></a>
+               th:href="@{/admin/v1/tour/approve}">Approve Tour <i class="fas fa-chevron-right"></i>
+            </a>
+
             <a class="nav-page-btn d-flex justify-content-between align-items-center"
                th:classappend="${activeTab == 'departureDate'} ? 'active'"
-               th:href="@{/admin/v1/tour/create-date}">Departure Date <i class="fas fa-chevron-right"></i></a>
+               th:href="@{/admin/v1/tour/create-date}">Departure Date <i class="fas fa-chevron-right"></i>
+            </a>
+
           </div>
 
           <!-- this is a marker of layout:fragment="tour-content" -->

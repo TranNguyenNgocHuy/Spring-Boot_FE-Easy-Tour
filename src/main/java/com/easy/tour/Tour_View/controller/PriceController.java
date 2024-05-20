@@ -75,13 +75,6 @@ public class PriceController {
         return "price/priceViewAll";
     }
 
-    @GetMapping(value = UrlPath.PRICE_APPROVE_PAGE)
-    public String priceApprove(Model model) {
-
-        model.addAttribute("activeNav", "price");
-        model.addAttribute("activeTab", "priceApprove");
-        return "price/priceApprove";
-    }
 
 
     @PostMapping(value = UrlPath.PRICE_CREATE_PAGE, params = "action")
@@ -93,7 +86,7 @@ public class PriceController {
                                     BindingResult result
     ) {
         boolean showProfit = false;
-        if (action.equals("cancel")) {
+        if ("cancel".equals(action)) {
             return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
         }
 
@@ -104,7 +97,7 @@ public class PriceController {
         }
 
         // submit calculate
-        if(action.equals("calculate")) {
+        if("calculate".equals(action)) {
             BigDecimal allocationCost = service.calculateAllocationCost(priceDto);
             BigDecimal individualCost = service.calculateIndividualCost(priceDto);
             BigDecimal percentProfit = service.calculateProfitAdult(priceDto);
@@ -124,7 +117,7 @@ public class PriceController {
         }
 
         // submit create price
-        if (action.equals("create")) {
+        if ("create".equals(action)) {
             // Send data to BE and receive response
             PriceResponseDTO response = restTemplateUtils.postData(priceDto, ApiPath.PRICE_CREATE, request, PriceResponseDTO.class);
             log.info("message: {}", response.getMessage());
@@ -211,13 +204,13 @@ public class PriceController {
     }
 
 
-    @GetMapping(value = UrlPath.PRICE_DELETE)
-    public String deletePrice(
-            @RequestParam("tourCode") String tourCode,
-            HttpServletRequest request
-    ) {
-        PriceResponseDTO responseDTO = restTemplateUtils
-                .deleteData(tourCode, ApiPath.PRICE_DELETE + tourCode, request, PriceResponseDTO.class);
-        return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
-    }
+//    @GetMapping(value = UrlPath.PRICE_DELETE)
+//    public String deletePrice(
+//            @RequestParam("tourCode") String tourCode,
+//            HttpServletRequest request
+//    ) {
+//        PriceResponseDTO responseDTO = restTemplateUtils
+//                .deleteData(tourCode, ApiPath.PRICE_DELETE + tourCode, request, PriceResponseDTO.class);
+//        return "redirect:" + UrlPath.PRICE_VIEW_ALL_PAGE;
+//    }
 }

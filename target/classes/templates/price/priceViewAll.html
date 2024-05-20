@@ -34,7 +34,6 @@
                     <th class="text-center" scope="col">Create Date</th>
                     <th class="text-center" scope="col">Approved By</th>
                     <th class="text-center" scope="col">Approved Date</th>
-                    <th class="text-center" scope="col">Status</th>
                     <th class="text-center" scope="col">Action</th>
                 </tr>
                 </thead>
@@ -45,7 +44,6 @@
                     <td class="text-center" th:text="${priceDto.createDate}"></td>
                     <td class="text-center" th:text="${priceDto.approvedBy}"></td>
                     <td class="text-center" th:text="${priceDto.approvalDate}"></td>
-                    <td class="fw-semibold text-primary text-center" th:text="${priceDto.approvalStatus}"></td>
                     <td class="d-flex justify-content-center gap-1 ">
                         <a class="btn btn-primary btn-small d-flex justify-content-center align-items-center"
                            role="button"
@@ -55,10 +53,6 @@
                            role="button"
                            th:href="@{/admin/v1/price/edit(tourCode=${priceDto.tourCode})}"
                         ><i class="fa-regular fa-pen-to-square"></i></a>
-                        <a class="btn btn-danger btn-small d-flex justify-content-center align-items-center"
-                           role="button"
-                           th:href="@{/admin/v1/price/delete(tourCode=${priceDto.tourCode})}"
-                        ><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                 </tr>
                 </tbody>

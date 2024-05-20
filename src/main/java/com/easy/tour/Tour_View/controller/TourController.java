@@ -86,7 +86,7 @@ public class TourController {
         }
 
         if (action.equals("create")) {
-
+            System.out.println(tourDto);
             TourResponseDTO response = restTemplateUtils.postData(tourDto, ApiPath.TOUR_CREATE, request, TourResponseDTO.class);
             log.info("message: {}", response.getMessage());
         }

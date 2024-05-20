@@ -22,7 +22,10 @@ public interface UrlPath {
 
     String PROFILE_VIEW_ALL_PAGE = BASE_URL + "/profile/view-all-profile";
 
-    String PROFILE_EDIT_BY_USER = BASE_URL + "/profile/edit";
+    String PROFILE_UPDATE_USER_INFO = BASE_URL + "/profile/update";
+
+    String PROFILE_CHANGE_PASSWORD = BASE_URL + "/profile/change-password";
+
 
 
     // TOUR //

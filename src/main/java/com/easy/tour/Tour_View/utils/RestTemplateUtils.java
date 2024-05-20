@@ -26,6 +26,7 @@ public class RestTemplateUtils {
      */
     public HttpEntity<?> setHeaderDefault(Object data, HttpServletRequest request) {
         String jwtToken = getCookie.extractTokenFromCookie(request);
+        System.out.println(jwtToken);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

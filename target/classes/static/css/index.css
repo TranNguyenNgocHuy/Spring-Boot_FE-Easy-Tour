@@ -24,7 +24,7 @@
   --white: #fff;
 
   --text-color-light: #f8f9fa;
-  --text-color01: #343a40;
+  --text-color-bold: #343a40;
 }
 
 * {
@@ -35,7 +35,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  color: var(--text-color01);
+  color: var(--text-color-bold);
 }
 
 .btn {
@@ -52,7 +52,7 @@ body {
 /* ***** LOGIN PAGE ***** */
 /* ///////////////////////// */
 .login-background {
-    background-image: url("../img/login-background.jpg");
+    background-image: url("../image/login-background.jpg");
     background-position: center;
     background-size: cover;
     width: 100vw;
@@ -88,8 +88,6 @@ body {
 }
 
 .login-body {
-
-
 }
 
 .login-footer {
@@ -170,15 +168,22 @@ body {
     font-size: 20px;
 }
 
-.header-user {
-    height: 28px;
-    width: 28px;
-    border-radius: 50px;
+.header-user-name-link:link {
+    text-decoration: none;
+}
+
+.header-user-image-wrapper {
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
     border: 2px solid var(--primary-color);
 }
 
-.header-user-icon {
-    color: var(--gray-icon);
+.header-user-image {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .header-user-name {
@@ -284,6 +289,23 @@ body {
     box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
 }
 
+.dashboard-header {
+    height: 80px;
+    border-bottom: 1px solid var(--background-primary);
+}
+
+
+.dashboard-content-img {
+    height: 500px;
+    width: 70%;
+    border-radius: 10px;
+}
+
+.dashboard-content-text {
+    font-size: 24px;
+    font-weight: 500;
+}
+
 /* ///////////////////////// */
 /* **** PROFILE LAYOUT **** */
 /* ///////////////////////// */
@@ -336,6 +358,81 @@ body {
 /* ***** PROFILE VIEW ALL ***** */
 
 
+/* ***** PROFILE UPDATE INFO ***** */
+.profile-edit-header {
+    border-bottom: 1px solid var(--background-primary);
+    padding-bottom: 5px;
+    height: 60px;
+}
+
+.profile-image-container {
+    position: relative;
+}
+
+.profile-edit-form{}
+
+.profile-image-wrapper {
+    width: 210px;
+    height: 210px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-image {
+    width: 195px;
+    height: 195px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.upload-button {
+    height: 40px;
+    width: 200px;
+    border-radius: 5px;
+}
+
+.profile-update-item {
+    width: 100%;
+    height: 100px;
+}
+
+.profile-update-label {
+    width: 23%;
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+.profile-update-input {
+    width: 100%;
+    height: 45px;
+    border-radius: 6px;
+    padding: 0 20px;
+    outline: none;
+    border: 0.5px solid var(--gray-border);
+    box-shadow: 1px 1px 3px 0px rgba(96, 108, 128, 0.1);
+    background-color: transparent;
+    font-size: 18px;
+}
+
+
+.profile-update-input::placeholder {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.link-changer-password {
+    margin-bottom: 90px;
+}
+
+.link-changer-password a {
+    color: var(--text-color-bold);
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /* ///////////////////////// */
 /* **** TOUR LAYOUT **** */

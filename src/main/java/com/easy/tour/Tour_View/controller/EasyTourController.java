@@ -42,11 +42,8 @@ public class EasyTourController {
     ) {
 
         String uuid = getCookie.extractUuidFromCookie(request);
-        UserDTO userDTO = new UserDTO();
-        userDTO.setUuid(uuid);
-
-        UserResponseDTO response = restTemplateUtils.getData(ApiPath.USER_GET_UUID + userDTO.getUuid(), request ,UserResponseDTO.class);
-
+        UserResponseDTO response = restTemplateUtils.getData(ApiPath.USER_GET_UUID + uuid, request ,UserResponseDTO.class);
+        System.out.println(response.getData());
         // convert userDTO to JSON
         String userDTOJson = null;
         try {
@@ -55,7 +52,6 @@ public class EasyTourController {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-
         model.addAttribute("userDTOJson", userDTOJson);
         model.addAttribute("activeNav", "dashboard");
         return "dashboard";

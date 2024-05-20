@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<div layout:fragment="content">
+        <div class="dashboard-page w-100 h-100 p-2">
+            <div class="profile-edit-header w-100 px-4 py-3">
+                <h5>Edit profile</h5>
+            </div>
+
+            <form method="post"
+                  th:action="@{${PROFILE_UPDATE_BY_USER}}"
+                  th:object="${profileUpdateDTO}"
+                  enctype="multipart/form-data"
+                  class="profile-edit-form h-100 w-100 d-flex px-4 py-5">
+                <div class="profile-image-container col-4 d-flex flex-column align-items-center">
+                    <figure class="profile-image-wrapper d-flex justify-content-center align-items-center">
+                        <img class="profile-image" id="profile-output-image" src="" alt="Profile Image" onerror="this.onerror=null;this.src='https://banner2.cleanpng.com/20180418/gre/kisspng-human-resources-login-management-information-payro-track-5ad7cda3586cb1.5605091515240923233622.jpg';">
+                    </figure>
+                    <input type="file" name="imageFile" id="profile-input-image" accept="image/*" style="display: none;">
+                    <input type="hidden" th:field="${profileUpdateDTO.avatarImg}">
+                    <button class="upload-button btn btn-outline-info" id="profile-upload-button">Upload Image</button>
+                </div>
+
+                <div class="profile-info col-8">
+
+                    <div class="w-75">
+                        <div class="profile-update-item d-flex justify-content-start align-items-start gap-4">
+                            <div class="profile-update-label">
+                                <label>First Name</label>
+                            </div>
+                            <div class="w-75">
+                                <input class="profile-update-input"
+                                       type="text"
+                                       placeholder="First Name"
+                                       th:field="${profileUpdateDTO.firstName}"
+                                >
+                                <p th:if="${#fields.hasErrors('firstName')}"
+                                   th:errorclass="text-danger"
+                                   th:errors="${profileUpdateDTO.firstName}"
+                                ></p>
+                            </div>
+                        </div>
+
+                        <div class="profile-update-item d-flex justify-content-start align-items-start gap-4">
+                            <div class="profile-update-label">
+                                <label>Last Name</label>
+                            </div>
+                            <div class="w-75">
+                                <input class="profile-update-input"
+                                       type="text"
+                                       placeholder="Last Name"
+                                       th:field="${profileUpdateDTO.lastName}"
+                                >
+                                <p th:if="${#fields.hasErrors('lastName')}"
+                                   th:errorclass="text-danger"
+                                   th:errors="${profileUpdateDTO.lastName}"
+                                ></p>
+                            </div>
+                        </div>
+
+                        <div class="profile-update-item d-flex justify-content-start align-items-start gap-4">
+                            <div class="profile-update-label">
+                                <label>Phone Number</label>
+                            </div>
+                            <div class="w-75">
+                                <input class="profile-update-input"
+                                       type="text"
+                                       placeholder="Phone Number"
+                                       th:field="${profileUpdateDTO.phoneNumber}"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="profile-update-item d-flex justify-content-start align-items-start gap-4">
+                            <label class="profile-update-label">Gender</label>
+                            <div class="w-75">
+                                <select class="form-select profile-update-input" th:field="${profileUpdateDTO.gender}">
+                                    <option selected value="false">Male</option>
+                                    <option value="true">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="link-changer-password w-75 d-flex flex-column align-items-end">
+                        <a th:href="@{/admin/v1/profile/change-password(uuid=${profileUpdateDTO.uuid})}" class=" d-flex align-items-center gap-2">Change Password <i class="fa-solid fa-circle-arrow-right"></i></a>
+                    </div>
+
+                    <div class="w-75 d-flex justify-content-end gap-2">
+                        <button type="submit" name="action" value="cancel" class="btn btn-outline-secondary">Cancel</button>
+                        <button type="submit" name="action" value="create" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+</body>
+</html>

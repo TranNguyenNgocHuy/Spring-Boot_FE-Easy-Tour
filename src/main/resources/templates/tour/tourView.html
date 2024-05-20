@@ -32,6 +32,8 @@
                 <tr>
                     <th class="text-center" scope="col">Tour Code</th>
                     <th class="text-center" scope="col">Tour Name</th>
+                    <th class="text-center" scope="col">Price Status</th>
+                    <th class="text-center" scope="col">Approval Status</th>
                     <th class="text-center" scope="col">Action</th>
                 </tr>
                 </thead>
@@ -39,6 +41,8 @@
                 <tr>
                     <td class="text-center" th:text="${tourDto.tourCode}"></td>
                     <td class="text-center" th:text="${tourDto.tourName}"></td>
+                    <td class="text-center text-info fw-bold" th:text="${tourDto.priceStatus}"></td>
+                    <td class="text-center text-info fw-bold" th:text="${tourDto.approvalStatus}"></td>
                     <td class="d-flex justify-content-center gap-1 ">
                         <a class="btn btn-success btn-small d-flex justify-content-center align-items-center"
                            role="button"

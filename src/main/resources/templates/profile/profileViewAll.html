@@ -23,7 +23,6 @@
                         <th class="text-center" scope="col">User Role</th>
                         <th class="text-center" scope="col">Gender</th>
                         <th class="text-center" scope="col">Email</th>
-                        <th class="text-center" scope="col">Status</th>
                         <th class="text-center" scope="col">Action</th>
                     </tr>
                 </thead>
@@ -31,7 +30,7 @@
                     <tr>
                         <td class="text-center" th:text="${userDto.firstName}"></td>
                         <td class="text-center" th:text="${userDto.lastName}"></td>
-                        <td class="text-center" ></td>
+                        <td class="text-center text-info fw-bold" th:text="${userDto.role}"></td>
                         <td class="text-center" th:text="${userDto.gender ? 'Female' : 'Male'}"></td>
                         <td class="text-center" th:text="${userDto.email}"></td>
                         <td class="text-center" ></td>

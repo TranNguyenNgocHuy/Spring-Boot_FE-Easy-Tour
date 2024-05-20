@@ -24,7 +24,7 @@ public class PriceDTO extends BaseObject {
     @NotEmpty(message = "You must choose Tour Code.")
     private String tourCode;
 
-    private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_OP;
+    private ApprovalStatus approvalStatus;
 
     @Min(value = 0, message = "The value must be >= 0.")
     @NotNull(message = "The value must be numeric.")

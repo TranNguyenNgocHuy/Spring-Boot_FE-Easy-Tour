@@ -32,11 +32,8 @@
                 <tr>
                     <th class="text-center" scope="col">Tour Code</th>
                     <th class="text-center" scope="col">Tour Name</th>
-                    <!-- <th class="text-center" scope="col">Creator</th>-->
-                    <!-- <th class="text-center" scope="col">Create Date</th>-->
-                    <!-- <th class="text-center" scope="col">Approved By</th>-->
-                    <!-- <th class="text-center" scope="col">Approved Date</th>-->
-                    <!-- <th class="text-center" scope="col">Status</th>-->
+                    <th class="text-center" scope="col">Price Status</th>
+                    <th class="text-center" scope="col">Approval Status</th>
                     <th class="text-center" scope="col">Action</th>
                 </tr>
                 </thead>
@@ -44,11 +41,8 @@
                 <tr>
                     <td class="text-center" th:text="${tourDto.tourCode}"></td>
                     <td class="text-center" th:text="${tourDto.tourName}"></td>
-                    <!-- <td class="text-center" th:text="${tourDto.createdDate}"></td>-->
-                    <!-- <td class="text-center" th:text="${tourDto.modifiedDate}"></td>-->
-                    <!-- <td class="text-center" th:text="${tourDto.createdBy}"></td>-->
-                    <!-- <td class="text-center" th:text="${tourDto.modifiedBy}"></td>-->
-                    <!--                <td class="fw-semibold text-primary text-center" th:text=""></td>-->
+                    <td class="text-center text-info fw-bold" th:text="${tourDto.priceStatus}"></td>
+                    <td class="text-center text-info fw-bold" th:text="${tourDto.approvalStatus}"></td>
                     <td class="d-flex justify-content-center gap-1 ">
                         <a class="btn btn-success btn-small d-flex justify-content-center align-items-center"
                            role="button"
@@ -62,8 +56,31 @@
                 </tr>
                 </tbody>
             </table>
+            <nav aria-label="Page navigation example" th:if="${totalPages != null}">
+                <ul class="pagination">
+                    <li th:class="${pageNumber == 1 ? 'page-item disabled' : 'page-item'}">
+                        <a class="page-link"
+                           th:href="${'/admin/v1/tour/view-all-tour?pageNumber=' + (pageNumber - 1) + '&pageSize=' + pageSize}"
+                           th:text="'Previous'"></a>
+                    </li>
+
+                    <li th:class="${pageNum == pageNumber ? 'page-item active' : 'page-item'}" th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+                        <a class="page-link"
+                           th:href="${'/admin/v1/tour/view-all-tour?pageNumber=' + pageNum + '&pageSize=' + pageSize}"
+                           th:text="${pageNum}"
+                        >Page</a>
+                    </li>
+
+                    <li th:class="${pageNumber == totalPages ? 'page-item disabled' : 'page-item'}">
+                        <a class="page-link"
+                           th:href="${'/admin/v1/tour/view-all-tour?pageNumber=' + (pageNumber + 1) + '&pageSize=' + pageSize}"
+                           th:text="'Next'"></a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
+
 
 </body>
 </html>

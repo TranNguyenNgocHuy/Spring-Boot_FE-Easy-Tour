@@ -9,8 +9,21 @@
 </head>
 <body>
   <div layout:fragment="content">
-    <div class="dashboard-page w-100 h-100 p-2">
-      Admin Dashboard
+    <div class="dashboard-page h-100 w-100 d-flex flex-column px-4">
+      <div class="dashboard-header d-flex align-items-center">
+          <h4 class="m-0">Welcome, <span id="dashboard-username"></span></h4>
+      </div>
+
+      <div class="dashboard-content flex-grow-1 d-flex py-4">
+          <div class="dashboard-content-left d-flex justify-content-center align-items-start col-6">
+              <img class="dashboard-content-img" src="/image/admin-dashboard.png">
+          </div>
+          <div class="h-50 d-flex justify-content-center align-items-center col-6">
+              <p class="dashboard-content-text">Welcome to the Easy Tour company workspace. We are delighted to have you on board, and we hope you have a productive and enjoyable experience managing our travel tours.</p>
+          </div>
+
+      </div>
+
     </div>
       <input type="hidden" id="userInfo" th:value="${userDTOJson}">
   </div>

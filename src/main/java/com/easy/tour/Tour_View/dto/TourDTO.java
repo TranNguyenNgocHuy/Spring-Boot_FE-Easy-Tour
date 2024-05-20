@@ -1,6 +1,7 @@
 package com.easy.tour.Tour_View.dto;
 
 import com.easy.tour.Tour_View.Enum.ApprovalStatus;
+import com.easy.tour.Tour_View.Enum.PriceStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -29,7 +30,9 @@ public class TourDTO {
 // private Date createDate;
 // private String approvedBy;
 // private Date approvalDate;
-    private ApprovalStatus approvalStatus = ApprovalStatus.PENDING_FC;
+    ApprovalStatus approvalStatus;
+
+    PriceStatus priceStatus;
 
     String tourRequestCode;
 

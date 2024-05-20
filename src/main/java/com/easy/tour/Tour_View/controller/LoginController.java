@@ -123,13 +123,17 @@ public class LoginController {
     }
 
     @GetMapping(value = UrlPath.LOGOUT)
-    public String logout(HttpServletResponse response) {
+    public String logout(HttpServletResponse response,
+                         HttpSession session) {
         // Create new cookie same key name
         Cookie cookie = new Cookie("jwtToken", null);
         cookie.setPath("/"); // Đảm bảo rằng cookie được xóa trên mọi đường dẫn
 
         // Kill cookie by setting expiration time to 0
         cookie.setMaxAge(0);
+
+        // set message forgotPassword = null
+        session.setAttribute("messageSuccess", null);
 
         // Update cookie to browser
         response.addCookie(cookie);

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,8 +33,12 @@ public class UserDTO extends BaseObject {
 
     private Integer phoneNumber;
 
-    @Size(min = 1, message = "Roles must not be empty")
-    private Set<String> roles;
+    private String avatarImg;
+
+    @NotEmpty(message = "You must choose a role.")
+    private String role;
+
+    private Set<String> roles = new HashSet<>();
 
     private Date createdDate;
 
